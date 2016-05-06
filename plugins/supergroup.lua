@@ -427,6 +427,33 @@ local function unlock_group_contacts(msg, data, target)
     return 'ارسال شماره باز شد'
   end
 end
+local function lock_group_tag(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_tag_lock = data[tostring(target)]['settings']['tag']
+  if group_tag_lock == 'yes' then
+    return 'تگ گذاشتن در حال حاظر ممنوع است'
+  else
+    data[tostring(target)]['settings']['tag'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'تگ گذاشتن ممنوع شد'
+  end
+end
+
+local function unlock_group_tag(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_tag_lock = data[tostring(target)]['settings']['tag']
+  if group_tag_lock == 'no' then
+    return 'تگ گذاشتن در حال حاظر مجاز است'
+  else
+    data[tostring(target)]['settings']['tag'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'تگ گذاشتن مجاز شد'
+  end
+end
 
 local function enable_strict_rules(msg, data, target)
   if not is_momod(msg) then
@@ -557,46 +584,6 @@ end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['tag'] then
 			data[tostring(target)]['settings']['tag'] = 'yes'
-		end
-        end
-        if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['antiemoji'] then
-			data[tostring(target)]['settings']['antiemoji'] = 'yes'
-		end
-        end
-        if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_badw'] then
-			data[tostring(target)]['settings']['lock_badw'] = 'yes'
-		end
-        end
-        if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_gif'] then
-			data[tostring(target)]['settings']['lock_gif'] = 'yes'
-		end
-        end
-        if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_ax'] then
-			data[tostring(target)]['settings']['lock_ax'] = 'yes'
-		end
-        end
-        if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_video'] then
-			data[tostring(target)]['settings']['lock_video'] = 'yes'
-		end
-        end
-        if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_audio'] then
-			data[tostring(target)]['settings']['lock_audio'] = 'yes'
-		end
-        end
-        if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_join'] then
-			data[tostring(target)]['settings']['lock_join'] = 'yes'
-		end
-        end
-        if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_share'] then
-			data[tostring(target)]['settings']['lock_share'] = 'yes'
 		end
         end
   local settings = data[tostring(target)]['settings']
@@ -1721,6 +1708,10 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked enabled strict settings")
 				return enable_strict_rules(msg, data, target)
 			end
+			if matches[2] == 'tag' then
+                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked tag posting")
+                                return lock_group_tag(msg, data, target)
+                        end
 		end
 
 		if matches[1] == 'unlock' and is_momod(msg) then
@@ -1765,6 +1756,10 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked disabled strict settings")
 				return disable_strict_rules(msg, data, target)
 			end
+			if matches[2] == 'tag' then
+                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked tag posting")
+                                return unlock_group_tag(msg, data, target)
+                        end
 		end
 
 		if matches[1] == 'setflood' then

@@ -453,6 +453,32 @@ local function unlock_group_tag(msg, data, target)
     save_data(_config.moderation.data, data)
     return 'تگ گذاشتن مجاز شد'
   end
+  local function lock_group_antiemoji(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_antiemoji_lock = data[tostring(target)]['settings']['antiemoji']
+  if group_antiemoji_lock == 'yes' then
+    return 'ایموجی گذاشتن قفل بود'
+  else
+    data[tostring(target)]['settings']['antiemoji'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'ایموجی گذاشتن قفل شد'
+  end
+end
+
+local function unlock_group_antiemoji(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_antiemoji_lock = data[tostring(target)]['settings']['antiemoji']
+  if group_antiemoji_lock == 'no' then
+    return 'ایموجی گزاشتن باز بود'
+  else
+    data[tostring(target)]['settings']['antiemoji'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'ایموجی گزاشتن مجاز شد'
+  end
 end
 
 local function enable_strict_rules(msg, data, target)
@@ -585,9 +611,13 @@ end
 		if not data[tostring(target)]['settings']['tag'] then
 			data[tostring(target)]['settings']['tag'] = 'yes'
 		end
+	if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['antiemoji'] then
+			data[tostring(target)]['settings']['antiemoji'] = 'no'
+		end
         end
   local settings = data[tostring(target)]['settings']
-  local text = "⚙ تنظیمات سوپرگروه :\n\n⚙  قفل لینک : "..settings.lock_link.."\n⚙ قفل فلود : "..settings.flood.."\n⚙ میزان حساسیت اسپم : "..NUM_MSG_MAX.."\n⚙ قفل اسپم : "..settings.lock_spam.."\n⚙  قفل عربی و فارسی : "..settings.lock_arabic.."\n⚙ قفل اعضا : "..settings.lock_member.."\n⚙  قفل کارکتر آر تی ال : "..settings.lock_rtl.."\n⚙ قفل استیکر : "..settings.lock_sticker.."\n⚙عمومی بودن گروه : "..settings.public.."\n⚙ قفل تنظیمات سختگیرانه : "..settings.strict.."\n⚙ قفل تگ : "..settings.tag
+  local text = "⚙ تنظیمات سوپرگروه :\n\n⚙  قفل لینک : "..settings.lock_link.."\n⚙ قفل فلود : "..settings.flood.."\n⚙ میزان حساسیت اسپم : "..NUM_MSG_MAX.."\n⚙ قفل اسپم : "..settings.lock_spam.."\n⚙  قفل عربی و فارسی : "..settings.lock_arabic.."\n⚙ قفل اعضا : "..settings.lock_member.."\n⚙  قفل کارکتر آر تی ال : "..settings.lock_rtl.."\n⚙ قفل استیکر : "..settings.lock_sticker.."\n⚙عمومی بودن گروه : "..settings.public.."\n⚙قفل تنظیمات سختگیرانه : "..settings.strict.."\n⚙ قفل تگ : "..settings.tag.."\n⚙ قفل ایموجی : "..settings.antiemoji
   return text
   end
 
@@ -1712,6 +1742,10 @@ local function run(msg, matches)
                                 savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked tag posting")
                                 return lock_group_tag(msg, data, target)
                         end
+                        if matches[2] == 'antiemoji' then
+                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked emoji posting")
+                                return lock_group_antiemoji(msg, data, target)
+                        end
 		end
 
 		if matches[1] == 'unlock' and is_momod(msg) then
@@ -1759,6 +1793,10 @@ local function run(msg, matches)
 			if matches[2] == 'tag' then
                                 savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked tag posting")
                                 return unlock_group_tag(msg, data, target)
+                        end
+                        if matches[2] == 'antiemoji' then
+                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked emoji posting")
+                                return unlock_group_antiemoji(msg, data, target)
                         end
 		end
 

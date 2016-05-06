@@ -427,60 +427,6 @@ local function unlock_group_contacts(msg, data, target)
     return 'ارسال شماره باز شد'
   end
 end
-local function lock_group_tag(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_tag_lock = data[tostring(target)]['settings']['tag']
-  if group_tag_lock == 'yes' then
-    return 'تگ گذاشتن در حال حاظر ممنوع است'
-  else
-    data[tostring(target)]['settings']['tag'] = 'yes'
-    save_data(_config.moderation.data, data)
-    return 'تگ گذاشتن ممنوع شد'
-  end
-end
-
-local function unlock_group_tag(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_tag_lock = data[tostring(target)]['settings']['tag']
-  if group_tag_lock == 'no' then
-    return 'تگ گذاشتن در حال حاظر مجاز است'
-  else
-    data[tostring(target)]['settings']['tag'] = 'no'
-    save_data(_config.moderation.data, data)
-    return 'تگ گذاشتن مجاز شد'
-  end
-  local function lock_group_antiemoji(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_antiemoji_lock = data[tostring(target)]['settings']['antiemoji']
-  if group_antiemoji_lock == 'yes' then
-    return 'ایموجی گذاشتن قفل بود'
-  else
-    data[tostring(target)]['settings']['antiemoji'] = 'yes'
-    save_data(_config.moderation.data, data)
-    return 'ایموجی گذاشتن قفل شد'
-  end
-end
-end
-
-local function unlock_group_antiemoji(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_antiemoji_lock = data[tostring(target)]['settings']['antiemoji']
-  if group_antiemoji_lock == 'no' then
-    return 'ایموجی گزاشتن باز بود'
-  else
-    data[tostring(target)]['settings']['antiemoji'] = 'no'
-    save_data(_config.moderation.data, data)
-    return 'ایموجی گزاشتن مجاز شد'
-  end
-end
 
 local function enable_strict_rules(msg, data, target)
   if not is_momod(msg) then
@@ -509,6 +455,85 @@ local function disable_strict_rules(msg, data, target)
     return 'تنظیمات سخت گیرانه از حالا غیر فعال شد'
   end
 end
+local function lock_group_tag(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_tag_lock = data[tostring(target)]['settings']['lock_tag']
+  if group_tag_lock == 'yes' then
+    return 'تگ گذاشتن در حال حاظر ممنوع است'
+  else
+    data[tostring(target)]['settings']['lock_tag'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'تگ گذاشتن ممنوع شد'
+  end
+end
+local function unlock_group_tag(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_tag_lock = data[tostring(target)]['settings']['lock_tag']
+  if group_tag_lock == 'no' then
+    return 'تگ گذاشتن در حال حاظر مجاز است'
+  else
+    data[tostring(target)]['settings']['lock_tag'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'تگ گذاشتن مجاز شد'
+  end
+end
+local function lock_group_lock_badw(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_badw_lock = data[tostring(target)]['settings']['lock_badw']
+  if group_lock_badw_lock == 'yes' then
+    return 'قفل بود'
+  else
+    data[tostring(target)]['settings']['lock_badw'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'قفل شد'
+  end
+end
+local function unlock_group_lock_badw(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_badw_lock = data[tostring(target)]['settings']['lock_badw']
+  if group_lock_badw_lock == 'no' then
+    return 'باز بود'
+  else
+    data[tostring(target)]['settings']['lock_badw'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'باز شد'
+  end
+end
+local function lock_group_lock_gif(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_gif_lock = data[tostring(target)]['settings']['lock_gif']
+  if group_lock_gif_lock == 'yes' then
+    return 'قفل بود'
+  else
+    data[tostring(target)]['settings']['lock_gif'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'قفل شد'
+  end
+end
+local function unlock_group_lock_gif(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_gif_lock = data[tostring(target)]['settings']['lock_gif']
+  if group_lock_gif_lock == 'no' then
+    return 'باز بود'
+  else
+    data[tostring(target)]['settings']['lock_gif'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'باز شد'
+  end
+end
+
 --End supergroup locks
 
 --'Set supergroup rules' function
@@ -521,7 +546,84 @@ local function set_rulesmod(msg, data, target)
   save_data(_config.moderation.data, data)
   return 'قوانین جدید ثبت شد'
 end
-
+local function lock_group_lock_ax(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_ax_lock = data[tostring(target)]['settings']['lock_ax']
+  if group_lock_ax_lock == 'yes' then
+    return 'قفل بود'
+  else
+    data[tostring(target)]['settings']['lock_ax'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'قفل شد'
+  end
+end
+local function unlock_group_lock_ax(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_ax_lock = data[tostring(target)]['settings']['lock_ax']
+  if group_lock_ax_lock == 'no' then
+    return 'باز بود'
+  else
+    data[tostring(target)]['settings']['lock_ax'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'باز شد'
+  end
+end
+local function lock_group_lock_video(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_video_lock = data[tostring(target)]['settings']['lock_video']
+  if group_lock_video_lock == 'yes' then
+    return 'قفل بود'
+  else
+    data[tostring(target)]['settings']['lock_video'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'قفل شد'
+  end
+end
+local function unlock_group_lock_video(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_video_lock = data[tostring(target)]['settings']['lock_video']
+  if group_lock_video_lock == 'no' then
+    return 'باز بود'
+  else
+    data[tostring(target)]['settings']['lock_video'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'باز شد'
+  end
+end
+local function lock_group_lock_audio(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_audio_lock = data[tostring(target)]['settings']['lock_audio']
+  if group_lock_audio_lock == 'yes' then
+    return 'قفل بود'
+  else
+    data[tostring(target)]['settings']['lock_audio'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'قفل شد'
+  end
+end
+local function unlock_group_lock_audio(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_audio_lock = data[tostring(target)]['settings']['lock_audio']
+  if group_lock_audio_lock == 'no' then
+    return 'باز بود'
+  else
+    data[tostring(target)]['settings']['lock_audio'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'باز شد'
+  end
+end
 --'Get supergroup rules' function
 local function get_rules(msg, data)
   local data_cat = 'rules'
@@ -612,13 +714,34 @@ end
 		if not data[tostring(target)]['settings']['tag'] then
 			data[tostring(target)]['settings']['tag'] = 'yes'
 		end
-	if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['antiemoji'] then
-			data[tostring(target)]['settings']['antiemoji'] = 'no'
+        end
+        if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_badw'] then
+			data[tostring(target)]['settings']['lock_badw'] = 'yes'
+		end
+        end
+        if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_gif'] then
+			data[tostring(target)]['settings']['lock_gif'] = 'yes'
+		end
+        end
+        if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_ax'] then
+			data[tostring(target)]['settings']['lock_ax'] = 'yes'
+		end
+        end
+        if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_video'] then
+			data[tostring(target)]['settings']['lock_video'] = 'yes'
+		end
+        end
+        if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_audio'] then
+			data[tostring(target)]['settings']['lock_audio'] = 'yes'
 		end
         end
   local settings = data[tostring(target)]['settings']
-  local text = "⚙ تنظیمات سوپرگروه :\n\n⚙  قفل لینک : "..settings.lock_link.."\n⚙ قفل فلود : "..settings.flood.."\n⚙ میزان حساسیت اسپم : "..NUM_MSG_MAX.."\n⚙ قفل اسپم : "..settings.lock_spam.."\n⚙  قفل عربی و فارسی : "..settings.lock_arabic.."\n⚙ قفل اعضا : "..settings.lock_member.."\n⚙  قفل کارکتر آر تی ال : "..settings.lock_rtl.."\n⚙ قفل استیکر : "..settings.lock_sticker.."\n⚙عمومی بودن گروه : "..settings.public.."\n⚙قفل تنظیمات سختگیرانه : "..settings.strict.."\n⚙ قفل تگ : "..settings.tag.."\n⚙ قفل ایموجی : "..settings.antiemoji
+  local text = "⚙ تنظیمات سوپرگروه :\n\n⚙  قفل لینک : "..settings.lock_link.."\n⚙  قفل فلود : "..settings.flood.."\n⚙ میزان حساسیت اسپم : "..NUM_MSG_MAX.."\n⚙  قفل اسپم : "..settings.lock_spam.."\n⚙  قفل عربی و فارسی : "..settings.lock_arabic.."\n⚙ قفل اعضا : "..settings.lock_member.."\n⚙  قفل کارکتر آر تی ال : "..settings.lock_rtl.."\n⚙ قفل استیکر : "..settings.lock_sticker.."\n⚙ عمومی بودن گروه : "..settings.public.."\n⚙ قفل تنظیمات سختگیرانه : "..settings.strict.."\n⚙ قفل تگ : "..settings.tag.."\n⚙ قفل فحش  : "..settings.lock_badw.."\n⚙ قفل گیف : "..settings.lock_gif.."\n⚙  قفل عکس : "..settings.lock_ax.."\n⚙  قفل فیلم : "..settings.lock_video.."\n⚙ قفل صدا : "..settings.lock_audio
   return text
   end
 
@@ -1740,13 +1863,21 @@ local function run(msg, matches)
 				return enable_strict_rules(msg, data, target)
 			end
 			if matches[2] == 'tag' then
-                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked tag posting")
-                                return lock_group_tag(msg, data, target)
-                        end
-                        if matches[2] == 'antiemoji' then
-                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked emoji posting")
-                                return lock_group_antiemoji(msg, data, target)
-                        end
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked tag posting")
+				return lock_group_tag(msg, data, target)
+			end
+			if matches[2] == 'lock_audio' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked lock_audio posting")
+				return lock_group_lock_audio(msg, data, target)
+			end
+			if matches[2] == 'lock_ax' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked lock_ax posting")
+				return lock_group_lock_ax(msg, data, target)
+			end
+			if matches[2] == 'lock_gif' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked lock_gif posting")
+				return lock_group_lock_gif(msg, data, target)
+			end
 		end
 
 		if matches[1] == 'unlock' and is_momod(msg) then
@@ -1792,13 +1923,21 @@ local function run(msg, matches)
 				return disable_strict_rules(msg, data, target)
 			end
 			if matches[2] == 'tag' then
-                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked tag posting")
-                                return unlock_group_tag(msg, data, target)
-                        end
-                        if matches[2] == 'antiemoji' then
-                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked emoji posting")
-                                return unlock_group_antiemoji(msg, data, target)
-                        end
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked tag posting")
+				return unlock_group_tag(msg, data, target)
+			end
+			if matches[2] == 'lock_audio' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked lock_audio posting")
+				return unlock_group_lock_audio(msg, data, target)
+			end
+			if matches[2] == 'lock_ax' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked lock_ax posting")
+				return unlock_group_lock_ax(msg, data, target)
+			end
+			if matches[2] == 'lock_gif' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked lock_gif posting")
+				return unlock_group_lock_gif(msg, data, target)
+			end
 		end
 
 		if matches[1] == 'setflood' then

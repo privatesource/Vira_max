@@ -466,6 +466,7 @@ local function unlock_group_tag(msg, data, target)
     return 'ایموجی گذاشتن قفل شد'
   end
 end
+end
 
 local function unlock_group_antiemoji(msg, data, target)
   if not is_momod(msg) then

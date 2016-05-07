@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+gol#!/usr/bin/env bash
 
 THIS_DIR=$(cd $(dirname $0); pwd)
 cd $THIS_DIR
@@ -13,7 +13,7 @@ update() {
 install_luarocks() {
   git clone https://github.com/keplerproject/luarocks.git
   cd luarocks
-  git checkout tags/v2.2.1 # Current stable
+  git checkout tags/v2.3.0-rc2 # Release Candidate
 
   PREFIX="$THIS_DIR/.luarocks"
 
@@ -33,12 +33,27 @@ install_luarocks() {
 }
 
 install_rocks() {
-  ./.luarocks/bin/luarocks install luasocket
+  ./.luarocks/bin/luarocks install luasec
   RET=$?; if [ $RET -ne 0 ];
     then echo "Error. Exiting."; exit $RET;
   fi
 
-  ./.luarocks/bin/luarocks install oauth
+  ./.luarocks/bin/luarocks install lbase64 20120807-3
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install luafilesystem
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install lub
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install luaexpat
   RET=$?; if [ $RET -ne 0 ];
     then echo "Error. Exiting."; exit $RET;
   fi
@@ -92,6 +107,16 @@ install() {
   cd ..
   install_luarocks
   install_rocks
+  
+  if [ -d /mnt/c/Windows ]; then
+    echo "Patching bot.lua for Windows 10 support..."
+    sed -i '5d' bot/bot.lua
+    sed -i '5d' bot/bot.lua
+    sed -i '5i\require("bot/utils")' bot/bot.lua
+    sed -i '6i\require("bot/permissions")' bot/bot.lua
+    sed -i '7i\--File patched to support W10' bot/bot.lua
+  fi
+  
 }
 
 if [ "$1" = "install" ]; then
@@ -110,11 +135,22 @@ else
     echo "Run $0 install"
     exit 1
   fi
-  while true; do
-   rm -r ../.telegram-cli/state
-   ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/Firebot.lua -l 1 -E $@
-   sleep 3
-  done
+  
+  chmod 777 steady.sh
+  chmod 777 start.sh
+  chmod 777 config_fix.sh
+  
+  #Adding some color. By @iicc1 :D
+   echo -e "\033[38;5;208m"
+   echo -e "      ____  ____ _____                        "
+   echo -e "     |    \|  _ )_   _|___ ____   __  __      "
+   echo -e "     | |_  )  _ \ | |/ .__|  _ \_|  \/  |     "
+   echo -e "     |____/|____/ |_|\____/\_____|_/\/\_|     "
+   echo -e "                                              \033[0;00m"
+   echo -e "\e[36m"
+   
+  if [ -f data/config.lua ]; then
+    ./config_fix.sh
+  fi
+  ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/Firebot.lua -l 1 -E $@
 fi
-
-

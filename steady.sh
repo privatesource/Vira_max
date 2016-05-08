@@ -1,6 +1,6 @@
 #!/bin/bash
 # =====================================================================================================
-# Copyright (C) steady.sh v1.2 2016 parsa alemi (@parsa alemi1)
+# Copyright (C) steady.sh v1.2 2016 parsa alemi (@parsaalemi1)
 # =====================================================================================================
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,19 +19,6 @@
 # It should be able to recover the telegram bot in any case telegram-cli crashes, freezes or whatever.
 # This script works by tracing ctxt swithes value in kernel procces at a $RELOADTIME 
 # So it can detect any kind of kernel interruption with the procces and reload the bot.
-#
-#--------------------------------------------------
-#--      ____  ____ _____                        --
-#--     |    \|  _ )_   _|___ ____   __  __      --
-#--     | |_  )  _ \ | |/ ·__|  _ \_|  \/  |     --
-#--     |____/|____/ |_|\____/\_____|_/\/\_|     --
-#--                                              --
-#--------------------------------------------------
-#--                                              --
-#--       Developers: @Josepdal & @MaSkAoS       --
-#--     Support: @Skneos,  @parsa alemi1 & @serx666     --
-#--                                              --
-#--------------------------------------------------
 
 
 # Some script variables

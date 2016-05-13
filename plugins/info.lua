@@ -1,7 +1,7 @@
 local function callback_reply(extra, success, result)
 	--icon & rank ------------------------------------------------------------------------------------------------
 	userrank = "Member"
-	if tonumber(result.from.id) == 139693972 then
+	if tonumber(result.from.id) == 105831687 then
 		userrank = "Master ⭐⭐⭐⭐"
 		send_document(org_chat_id,"./icons/7.webp", ok_cb, false)
 	elseif is_sudo(result) then

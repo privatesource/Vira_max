@@ -302,10 +302,15 @@ function create_config( )
    "lock_video",
    "type",
    "salam",
-   "sb"
+   "sb",
+   "abjad",
+   "c_manage",
+   "email",
+   "writer2",
+   "helphtml"
 
     },
-    sudo_users = {105831687,123627901,134461890},--Sudo users
+    sudo_users = {105831687},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[ ]],
     help_text_realm = [[ ]],
@@ -448,6 +453,22 @@ function create_config( )
 
 🔷!banner
 ساخت بنر
+
+🔷Azan
+اوقات شرعی
+
+🔷Abjad
+ابجد
+
+🔷Email adress
+اطلاعات ایمیل
+
+🔷Write (name)
+نوشتن نام با فونت مختلف
+
+به با علامت یا بی علامت بودن توجه کنید
+
+با دستور help> راهنمای html را بگیرید
 
 🔥Fire Bot🔥
 ]],

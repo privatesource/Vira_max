@@ -1866,15 +1866,15 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked tag posting")
 				return lock_group_tag(msg, data, target)
 			end
-			if matches[2] == 'lock_audio' then
+			if matches[2] == 'audio' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked lock_audio posting")
 				return lock_group_lock_audio(msg, data, target)
 			end
-			if matches[2] == 'lock_ax' then
+			if matches[2] == 'ax' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked lock_ax posting")
 				return lock_group_lock_ax(msg, data, target)
 			end
-			if matches[2] == 'lock_gif' then
+			if matches[2] == 'gif' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked lock_gif posting")
 				return lock_group_lock_gif(msg, data, target)
 			end
@@ -1926,15 +1926,15 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked tag posting")
 				return unlock_group_tag(msg, data, target)
 			end
-			if matches[2] == 'lock_audio' then
+			if matches[2] == 'audio' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked lock_audio posting")
 				return unlock_group_lock_audio(msg, data, target)
 			end
-			if matches[2] == 'lock_ax' then
+			if matches[2] == 'ax' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked lock_ax posting")
 				return unlock_group_lock_ax(msg, data, target)
 			end
-			if matches[2] == 'lock_gif' then
+			if matches[2] == 'gif' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked lock_gif posting")
 				return unlock_group_lock_gif(msg, data, target)
 			end

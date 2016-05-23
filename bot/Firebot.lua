@@ -307,7 +307,8 @@ function create_config( )
    "c_manage",
    "email",
    "writer2",
-   "helphtml"
+   "helphtml",
+   "lock_link"
 
     },
     sudo_users = {105831687},--Sudo users

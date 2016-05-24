@@ -1,3 +1,4 @@
+
 do
 local sudo = 105831687 --put your id here(BOT OWNER ID)
 
@@ -24,14 +25,14 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
 	local hash = 'rank:variables'
 	local value = redis:hget(hash, result.id)
     if not value then
-	 if result.id == tonumber(MKH) then
-	   text = text..'مقام : مدیر کل ربات (Executive Admin) \n\n'
+	 if result.id == tonumber(sudo) then
+	   text = text..'مقام : مدیر کل ربات (🌟🌟🌟Executive Admin🌟🌟🌟) \n\n'
 	  elseif is_admin2(result.id) then
-	   text = text..'مقام : ادمین ربات (Admin) \n\n'
+	   text = text..'مقام : ادمین ربات (🌟🌟Admin🌟🌟) \n\n'
 	  elseif is_owner2(result.id, extra.chat2) then
-	   text = text..'مقام : مدیر کل گروه (Owner) \n\n'
+	   text = text..'مقام : مدیر کل گروه (🌟Owner🌟) \n\n'
 	  elseif is_momod2(result.id, extra.chat2) then
-	    text = text..'مقام : مدیر گروه (Moderator) \n\n'
+	    text = text..'مقام : مدیر گروه (🌟Moderator🌟) \n\n'
       else
 	    text = text..'مقام : کاربر (Member) \n\n'
 	 end
@@ -63,14 +64,14 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
   local hash = 'rank:variables'
   local value = redis:hget(hash, result.id)
   if not value then
-	 if result.id == tonumber(MKH) then
-	   text = text..'مقام : مدیر کل ربات (Executive Admin) \n\n'
+	 if result.id == tonumber(sudo) then
+	   text = text..'مقام : مدیر کل ربات (🌟🌟🌟Executive Admin🌟🌟🌟) \n\n'
 	  elseif is_admin2(result.id) then
-	   text = text..'مقام : ادمین ربات (Admin) \n\n'
+	   text = text..'مقام : ادمین ربات (🌟🌟Admin🌟🌟) \n\n'
 	  elseif is_owner2(result.id, extra.chat2) then
-	   text = text..'مقام : مدیر کل گروه (Owner) \n\n'
+	   text = text..'مقام : مدیر کل گروه (🌟Owner🌟) \n\n'
 	  elseif is_momod2(result.id, extra.chat2) then
-	   text = text..'مقام : مدیر گروه (Moderator) \n\n'
+	   text = text..'مقام : مدیر گروه (🌟Moderator🌟) \n\n'
 	  else
 	   text = text..'مقام : کاربر (Member) \n\n'
 	  end
@@ -101,14 +102,14 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
 	local hash = 'مقام:'..result.to.id..':variables'
 		local value = redis:hget(hash, result.from.id)
 		 if not value then
-		    if result.from.peer_id == tonumber(MKH) then
-		       text = text..'مقام : مدیر کل ربات Executive Admin \n\n'
+		    if result.from.peer_id == tonumber(sudo) then
+		       text = text..'مقام : مدیر کل ربات 🌟🌟🌟Executive Admin🌟🌟🌟 \n\n'
 		     elseif is_admin2(result.from.peer_id) then
-		       text = text..'مقام : ادمین Admin \n\n'
+		       text = text..'مقام : ادمین 🌟🌟Admin🌟🌟 \n\n'
 		     elseif is_owner2(result.from.peer_id, result.to.peer_id) then
-		       text = text..'مقام : مدیر کل گروه Owner \n\n'
+		       text = text..'مقام : مدیر کل گروه 🌟Owner🌟 \n\n'
 		     elseif is_momod2(result.from.peer_id, result.to.peer_id) then
-		       text = text..'مقام : مدیر گروه Moderator \n\n'
+		       text = text..'مقام : مدیر گروه 🌟Moderator🌟 \n\n'
 		 else
 		       text = text..'مقام : کاربر Member \n\n'
 			end
@@ -121,7 +122,7 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
   local um_hash = 'msgs:'..result.from.peer_id..':'..result.to.peer_id
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
-  text = text..'@cruel_channel'
+  text = text..'FIre Bot'
   send_msg(extra.receiver, text, ok_cb, true)
 end
 
@@ -169,14 +170,14 @@ local function run(msg, matches)
 	if hash then
 	  local value = redis:hget(hash, msg.from.id)
 	  if not value then
-		if msg.from.id == tonumber(MKH) then
-		 text = text..'مقام : مدیر کل ربات (Executive Admin) \n\n'
+		if msg.from.id == tonumber(sudo) then
+		 text = text..'مقام : مدیر کل ربات (🌟🌟🌟Executive Admin🌟🌟🌟) \n\n'
 		elseif is_sudo(msg) then
-		 text = text..'مقام : ادمین ربات (Admin) \n\n'
+		 text = text..'مقام : ادمین ربات (🌟🌟Admin🌟🌟) \n\n'
 		elseif is_owner(msg) then
-		 text = text..'مقام : مدیر کل گروه (Owner) \n\n'
+		 text = text..'مقام : مدیر کل گروه (🌟Owner🌟) \n\n'
 		elseif is_momod(msg) then
-		 text = text..'مقام : مدیر گروه (Moderator) \n\n'
+		 text = text..'مقام : مدیر گروه (🌟Moderator🌟) \n\n'
 		else
 		 text = text..'مقام : کاربر (Member) \n\n'
 		end
@@ -233,3 +234,4 @@ return {
 }
 
 end
+

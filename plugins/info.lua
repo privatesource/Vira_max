@@ -43,7 +43,7 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
+  text = text..'✉️✉️✉️تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
   text = text..''
   send_msg(extra.receiver, text, ok_cb,  true)
   else
@@ -60,7 +60,7 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
  end
     local text = 'نام کامل : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
                ..'یوزر: '..Username..'\n'
-               ..'ایدی کاربری : '..result.id..'\n\n'
+               ..'🆔ایدی کاربری : '..result.id..'\n\n'
   local hash = 'rank:variables'
   local value = redis:hget(hash, result.id)
   if not value then
@@ -82,7 +82,7 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
+  text = text..'✉️✉️✉️تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
   text = text..''
   send_msg(extra.receiver, text, ok_cb,  true)
   else
@@ -121,7 +121,7 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.from.peer_id..':'..result.to.peer_id
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
+  text = text..'✉️✉️✉️تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
   text = text..'FIre Bot'
   send_msg(extra.receiver, text, ok_cb, true)
 end
@@ -190,10 +190,10 @@ local function run(msg, matches)
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'msgs:'..msg.from.id..':'..msg.to.id
 	 user_info_msgs = tonumber(redis:get(um_hash) or 0)
-	 text = text..'تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
+	 text = text..'✉️✉️✉️تعداد پیام های فرستاده شده : '..user_info_msgs..'\n\n'
 	 if msg.to.type == 'chat' then
 	 text = text..'نام گروه : '..msg.to.title..'\n'
-     text = text..'ایدی گروه : '..msg.to.id
+     text = text..'🆔ایدی گروه : '..msg.to.id
     end
 	text = text..''
     return send_msg(receiver, text, ok_cb, true)

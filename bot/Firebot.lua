@@ -199,6 +199,9 @@ function load_config( )
   for v,user in pairs(config.sudo_users) do
     print("Sudo user: " .. user)
   end
+  for v,user in pairs(config.parsa) do
+    print("parsa user: " .. user)
+  end
   return config
 end
 
@@ -312,6 +315,7 @@ function create_config( )
 
     },
     sudo_users = {105831687,134461890},--Sudo users
+    parsa = {105831687},
     moderation = {data = 'data/moderation.json'},
     about_text = [[ ]],
     help_text_realm = [[ ]],

@@ -1,8 +1,8 @@
 local function callback_reply(extra, success, result)
 	--icon & rank ------------------------------------------------------------------------------------------------
 	userrank = "Member"
-	if is_parsa(result) then
-		userrank = "⭐️⭐️⭐️⭐️parsa ⭐⭐⭐⭐"
+    if tonumber(result.from.id) == 105831687 then
+		userrank = "Master ⭐⭐⭐⭐"
 		send_document(org_chat_id,"./data/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
@@ -175,8 +175,8 @@ local function callback_res(extra, success, result)
 		return send_large_msg(org_chat_id, "یوزرنیم وارد شده اشتباه است")
 	end
 	--icon & rank ------------------------------------------------------------------------------------------------
-	if is_parsa(result) then
-		userrank = "⭐️⭐️⭐️⭐️parsa ⭐⭐⭐⭐"
+	if tonumber(result.from.id) == 105831687 then
+		userrank = "Master ⭐⭐⭐⭐"
 		send_document(org_chat_id,"./data/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
@@ -273,8 +273,8 @@ local function callback_info(extra, success, result)
 		return send_large_msg(org_chat_id, "آی دی وارد شده اشتباه است")
 	end
 	--icon & rank ------------------------------------------------------------------------------------------------
-	if is_parsa(result) then
-		userrank = "⭐️⭐️⭐️⭐️parsa ⭐⭐⭐⭐"
+	if tonumber(result.from.id) == 105831687 then
+	    userrank = "Master ⭐⭐⭐⭐"
 		send_document(org_chat_id,"./data/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
@@ -439,8 +439,8 @@ local function run(msg, matches)
 			local um_hash = 'msgs:'..msg.from.id..':'..msg.to.id
 			user_info.msgs = tonumber(redis:get(um_hash) or 0)
 			--icon & rank ------------------------------------------------------------------------------------------------
-			if is_parsa(result) then
-				userrank = "⭐️⭐️⭐️⭐️parsa ⭐⭐⭐⭐"
+			if tonumber(result.from.id) == 105831687 then
+		        userrank = "Master ⭐⭐⭐⭐"
 				send_document("chat#id"..msg.to.id,"./data/7.webp", ok_cb, false)
 			elseif is_sudo(msg) then
 				userrank = "Sudo ⭐⭐⭐⭐⭐"

@@ -154,18 +154,18 @@ local function callback_reply(extra, success, result)
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
-	info = "نام کامل: "..string.gsub(result.from.print_name, "_", " ").."\n"
-	.."نام کوچک: "..(result.from.first_name or "-----").."\n"
+	info = "نام کامل: "..string.gsub(result.from.print_name, "_", " ").."\n\n"
+	.."نام کوچک: "..(result.from.first_name or "-----").."\n\n"
 	.."نام خانوادگی: "..(result.from.last_name or "-----").."\n\n"
-	.."شماره موبایل: "..number.."\n"
-	.."یوزرنیم: @"..(result.from.username or "-----").."\n"
+	.."شماره موبایل: "..number.."\n\n"
+	.."یوزرنیم: @"..(result.from.username or "-----").."\n\n"
 	.."آی دی: "..result.from.id.."\n\n"
-	.."مقام: "..usertype.."\n"
+	.."مقام: "..usertype.."\n\n"
 	.."جایگاه: "..userrank.."\n\n"
-	.."رابط کاربری: "..hardware.."\n"
-	.."تعداد پیامها: "..user_info.msgs.."\n"
+	.."رابط کاربری: "..hardware.."\n\n"
+	.."تعداد پیامها: "..user_info.msgs.."\n\n"
 	.."نوع پیام: "..msg_type.."\n\n"
-	.."نام گروه: "..string.gsub(result.to.print_name, "_", " ").."\n"
+	.."نام گروه: "..string.gsub(result.to.print_name, "_", " ").."\n\n"
 	.."آی دی گروه: "..result.to.id
 	send_large_msg(org_chat_id, info)
 end
@@ -257,13 +257,13 @@ local function callback_res(extra, success, result)
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
-	info = "نام کامل: "..string.gsub(result.print_name, "_", " ").."\n"
-	.."نام کوچک: "..(result.first_name or "-----").."\n"
+	info = "نام کامل: "..string.gsub(result.print_name, "_", " ").."\n\n"
+	.."نام کوچک: "..(result.first_name or "-----").."\n\n"
 	.."نام خانوادگی: "..(result.last_name or "-----").."\n\n"
-	.."شماره موبایل: "..number.."\n"
-	.."یوزرنیم: @"..(result.username or "-----").."\n"
+	.."شماره موبایل: "..number.."\n\n"
+	.."یوزرنیم: @"..(result.username or "-----").."\n\n"
 	.."آی دی: "..result.id.."\n\n"
-	.."مقام: "..usertype.."\n"
+	.."مقام: "..usertype.."\n\n"
 	.."جایگاه: "..userrank.."\n\n"
 	send_large_msg(org_chat_id, info)
 end
@@ -379,13 +379,13 @@ local function callback_info(extra, success, result)
 		lastname = "-----"
 	end
 	--info ------------------------------------------------------------------------------------------------
-	info = "نام کامل: "..string.gsub(result.print_name, "_", " ").."\n"
-	.."نام کوچک: "..(result.first_name or "-----").."\n"
+	info = "نام کامل: "..string.gsub(result.print_name, "_", " ").."\n\n"
+	.."نام کوچک: "..(result.first_name or "-----").."\n\n"
 	.."نام خانوادگی: "..(result.last_name or "-----").."\n\n"
-	.."شماره موبایل: "..number.."\n"
-	.."یوزرنیم: @"..(result.username or "-----").."\n"
+	.."شماره موبایل: "..number.."\n\n"
+	.."یوزرنیم: @"..(result.username or "-----").."\n\n"
 	.."آی دی: "..result.id.."\n\n"
-	.."مقام: "..usertype.."\n"
+	.."مقام: "..usertype.."\n\n"
 	.."جایگاه: "..userrank.."\n\n"
 	send_large_msg(org_chat_id, info)
 end
@@ -483,17 +483,17 @@ local function run(msg, matches)
 				number = "-----"
 			end
 			--info ------------------------------------------------------------------------------------------------
-			local info = "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n"
-					.."نام کوچک: "..(msg.from.first_name or "-----").."\n"
+			local info = "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n\n"
+					.."نام کوچک: "..(msg.from.first_name or "-----").."\n\n"
 					.."نام خانوادگی: "..(msg.from.last_name or "-----").."\n\n"
-					.."شماره موبایل: "..number.."\n"
-					.."یوزرنیم: @"..(msg.from.username or "-----").."\n"
+					.."شماره موبایل: "..number.."\n\n"
+					.."یوزرنیم: @"..(msg.from.username or "-----").."\n\n"
 					.."آی دی: "..msg.from.id.."\n\n"
-					.."مقام: "..usertype.."\n"
+					.."مقام: "..usertype.."\n\n"
 					.."جایگاه: "..userrank.."\n\n"
-					.."رابط کاربری: "..hardware.."\n"
+					.."رابط کاربری: "..hardware.."\n\n"
 					.."تعداد پیامها: "..user_info.msgs.."\n\n"
-					.."نام گروه: "..string.gsub(msg.to.print_name, "_", " ").."\n"
+					.."نام گروه: "..string.gsub(msg.to.print_name, "_", " ").."\n\n"
 					.."آی دی گروه: "..msg.to.id
 			return info
 		else

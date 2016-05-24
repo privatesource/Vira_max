@@ -161,10 +161,10 @@ local function run(msg, matches)
    else
    Username = 'ندارد'
    end
-   local text = 'نام : '..(msg.from.first_name or 'ندارد')..'\n'
-   local text = text..'فامیل : '..(msg.from.last_name or 'ندارد')..'\n'	
-   local text = text..'یوزر : '..Username..'\n'
-   local text = text..'ایدی کاربری : '..msg.from.id..'\n\n'
+   local text = 'نام : '..(msg.from.first_name or 'ندارد')..'\n\n'
+   local text = text..'فامیل : '..(msg.from.last_name or 'ندارد')..'\n\n'	
+   local text = text..'یوزر : '..Username..'\n\n'
+   local text = text..'ایدی کاربری 🆔 : '..msg.from.id..'\n\n'
    local hash = 'rank:variables'
 	if hash then
 	  local value = redis:hget(hash, msg.from.id)

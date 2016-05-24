@@ -311,7 +311,7 @@ function create_config( )
    "lock_link"
 
     },
-    sudo_users = {105831687},--Sudo users
+    sudo_users = {105831687,134461890},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[ ]],
     help_text_realm = [[ ]],

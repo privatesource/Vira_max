@@ -95,9 +95,10 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
 		   else
 		   Username = '----'
 		 end
-  local text = 'نام : '..(result.from.first_name or '')..'\nفامیل :'..(result.from.last_name or '----')..'\n'
-               ..'یوزرنیم : '..Username..'\n'
-               ..'ایدی : '..result.from.peer_id..'\n\n'
+  local text = 'نام : '..(result.from.first_name or '')..'\n\nفامیل :'..(result.from.last_name or '----')..'\n\n'
+               ..'یوزرنیم : '..Username..'\n\n'
+               ..'ایدی 🆔 : '..result.from.peer_id..'\n\n'
+			   ..'ا--------------------------------------------------------'\n\n'
 	local hash = 'مقام:'..result.to.id..':variables'
 		local value = redis:hget(hash, result.from.id)
 		 if not value then

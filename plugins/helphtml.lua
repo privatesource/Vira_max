@@ -1,12 +1,15 @@
-local function run(msg,matches)
-    if matches[1] == "help>" then
-    send_document("chat#id"..msg.to.id,"./data/help.html", ok_cb, false)
-    end
+do
+
+function run(msg, matches)
+   send_document(get_receiver(msg), "./data/help.html", ok_cb, false)
 end
 
 return {
-    patterns = {
-        "^([Hh]elp>)$",
-    },
-    run = run
-    }
+patterns = {
+"^![help]$",
+
+},
+run = run
+}
+
+end

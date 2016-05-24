@@ -3,7 +3,7 @@ local function callback_reply(extra, success, result)
 	userrank = "Member"
 	if tonumber(result.from.id) == 105831687 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_chat_id,"./icons/7.webp", ok_cb, false)
+		send_document(org_chat_id,"./data/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"./icons/8.webp", ok_cb, false)
@@ -177,7 +177,7 @@ local function callback_res(extra, success, result)
 	--icon & rank ------------------------------------------------------------------------------------------------
 	if tonumber(result.id) == 105831687 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_chat_id,"./icons/7.webp", ok_cb, false)
+		send_document(org_chat_id,"./data/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"./icons/8.webp", ok_cb, false)
@@ -275,7 +275,7 @@ local function callback_info(extra, success, result)
 	--icon & rank ------------------------------------------------------------------------------------------------
 	if tonumber(result.id) == 105831687 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_chat_id,"./icons/7.webp", ok_cb, false)
+		send_document(org_chat_id,"./data/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"./icons/8.webp", ok_cb, false)
@@ -441,7 +441,7 @@ local function run(msg, matches)
 			--icon & rank ------------------------------------------------------------------------------------------------
 			if tonumber(msg.from.id) == 105831687 then
 				userrank = "Master ⭐⭐⭐⭐"
-				send_document("chat#id"..msg.to.id,"./icons/7.webp", ok_cb, false)
+				send_document("chat#id"..msg.to.id,"./data/7.webp", ok_cb, false)
 			elseif is_sudo(msg) then
 				userrank = "Sudo ⭐⭐⭐⭐⭐"
 				send_document("chat#id"..msg.to.id,"./icons/8.webp", ok_cb, false)

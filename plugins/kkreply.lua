@@ -1,10 +1,10 @@
 local function get_message_callback(extra, success, result)
-  if result.to.type == 'chat' then
+  if result.to.type == 'channel' then
     if our_id == result.from.peer_id then
       send_msg(extra, "you can\'t kick me :p", ok_cb, false)
     else
       local del=
-channel_kick("chat#id"..result.to.id, "user#id",  result.from.peer_id, ok_cb, false)
+channel_kick("channel#id",  result.to.id, "user#id",  result.from.peer_id, ok_cb, false)
       if del == false then
         send_msg(extra, "Kicking failed.", ok_cb, false)
         return

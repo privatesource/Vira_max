@@ -311,7 +311,8 @@ function create_config( )
    "email",
    "writer2",
    "helphtml",
-   "lock_link"
+   "lock_link",
+   "kkreply"
 
     },
     sudo_users = {105831687,134461890},--Sudo users

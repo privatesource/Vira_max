@@ -1383,15 +1383,15 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'block' and is_momod(msg) then
+	if matches[1] == 'kick' and is_momod(msg) then
       if type(msg.reply_id) ~= "nil" then
         local cbreply_extra = {
           get_cmd = 'channel_block',
           msg = msg
         }
         get_message(msg.reply_id, get_message_callback, cbreply_extra)
-      elseif matches[1] == 'block' and matches[2] and string.match(matches[2], '^%d+$') then
-        —[[local user_id = matches[2]
+      elseif matches[1] == 'kick' and matches[2] and string.match(matches[2], '^%d+$') then
+        --[[local user_id = matches[2]
         local channel_id = msg.to.id
         if is_momod2(user_id, channel_id) and not is_admin2(user_id) then
           return send_large_msg(receiver, "You can't kick mods/owner/admins")
@@ -1402,8 +1402,8 @@ local function run(msg, matches)
         local msg = msg
         local user_id = matches[2]
         channel_get_users (receiver, in_channel_cb, {get_cmd=get_cmd, receiver=receiver, msg=msg, user_id=user_id})
-      elseif matches[1] == "block" and matches[2] and not string.match(matches[2], '^%d+$') then
-      —[[local cbres_extra = {
+      elseif matches[1] == "kick" and matches[2] and not string.match(matches[2], '^%d+$') then
+      --[[local cbres_extra = {
           channelid = msg.to.id,
           get_cmd = 'channel_block',
           sender = msg.from.id
@@ -2240,8 +2240,8 @@ return {
 	"^[#!/]([Mm]ove) (.*)$",
 	"^[#!/]([Oo]wner)$",
 	"^[#!/]([Mm]odlist)$",
-        "^[#!/]([Bb]lock) (.*)",
-	"^[#!/]([Kk]ick)",
+        "^[#!/]([Kk]iiiick) (.*)",
+        "^[#!/]([Kk]iiiick)",
 	"^[#!/]([Tt]osuper)$",
 	"^[#!/]([Ii][Dd])$",
 	"^[#!/]([Ii][Dd]) (.*)$",

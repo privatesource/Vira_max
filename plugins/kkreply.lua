@@ -4,7 +4,7 @@ local function get_message_callback(extra, success, result)
       send_msg(extra, "you can\'t kick me :p", ok_cb, false)
     else
       local del=
-chat_del_user("channel#id"..result.to.id, "user#id"..result.from.id, ok_cb, false)
+chat_del_user("chat#id"..result.to.id, "user#id"..result.from.id, ok_cb, false)
       if del == false then
         send_msg(extra, "Kicking failed.", ok_cb, false)
         return

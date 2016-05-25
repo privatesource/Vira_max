@@ -10,7 +10,6 @@ channel_kick("channel#id",  result.to.id, "user#id",  result.from.peer_id, ok_cb
         return
       end
     end
-end
 local function run(msg, matches)
   if msg.text == "!kick" and is_momod(msg) and msg.reply_id then
     msgr = get_message(msg.reply_id,get_message_callback, get_receiver(msg))

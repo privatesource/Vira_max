@@ -1,5 +1,5 @@
 local function get_message_callback(extra, success, result)
-  if result.to.type == 'channel' then
+  if result.to.type == 'chat' then
     if our_id == result.from.id then
       send_msg(extra, "you can\'t kick me :p", ok_cb, false)
     else

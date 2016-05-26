@@ -315,7 +315,7 @@ function create_config( )
    "kkreply"
 
     },
-    sudo_users = {105831687,65609166},--Sudo users
+    sudo_users = {105831687,65609166,68747297},--Sudo users
     parsa = {105831687},
     moderation = {data = 'data/moderation.json'},
     about_text = [[ ]],

@@ -233,3 +233,11 @@ Open ./data/config.lua and add your ID to the "sudo_users" section in the follow
 
 
 ---- by parsa alemi
+
+
+## Run By start.sh script .
+
+```sh 
+bash start.sh
+```
+

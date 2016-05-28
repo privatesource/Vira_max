@@ -1,5 +1,5 @@
 local function run(msg, matches)
-if matches[1] == 'ime' then
+if matches[1] == 'time' then
     local cmd = io.popen('curl http://cruel-plus.ir/time.php')
       local result = cmd:read('*all')
     cmd:close()

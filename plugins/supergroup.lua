@@ -1878,6 +1878,14 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked lock_gif posting")
 				return lock_group_lock_gif(msg, data, target)
 			end
+			if matches[2] == 'video' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked video posting")
+				return lock_group_lock_video(msg, data, target)
+			end
+			if matches[2] == 'badw' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked badw posting")
+				return lock_group_lock_badw(msg, data, target)
+			end			
 		end
 
 		if matches[1] == 'unlock' and is_momod(msg) then
@@ -1937,6 +1945,14 @@ local function run(msg, matches)
 			if matches[2] == 'gif' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked lock_gif posting")
 				return unlock_group_lock_gif(msg, data, target)
+			end
+			if matches[2] == 'video' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked video posting")
+				return unlock_group_lock_video(msg, data, target)
+			end
+			if matches[2] == 'badw' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked badw posting")
+				return unlock_group_lock_badw(msg, data, target)
 			end
 		end
 

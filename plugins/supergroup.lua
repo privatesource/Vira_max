@@ -512,10 +512,10 @@ local function lock_group_lock_gif(msg, data, target)
     return
   end
   local group_lock_gif_lock = data[tostring(target)]['settings']['lock_gif']
-  if group_lock_gif_lock == 'yes' then
+  if group_lock_gif_lock == '🔒' then
     return 'قفل بود'
   else
-    data[tostring(target)]['settings']['lock_gif'] = 'yes'
+    data[tostring(target)]['settings']['lock_gif'] = '🔒'
     save_data(_config.moderation.data, data)
     return 'قفل شد'
   end
@@ -525,10 +525,10 @@ local function unlock_group_lock_gif(msg, data, target)
     return
   end
   local group_lock_gif_lock = data[tostring(target)]['settings']['lock_gif']
-  if group_lock_gif_lock == 'no' then
+  if group_lock_gif_lock == '🔓' then
     return 'باز بود'
   else
-    data[tostring(target)]['settings']['lock_gif'] = 'no'
+    data[tostring(target)]['settings']['lock_gif'] = '🔓'
     save_data(_config.moderation.data, data)
     return 'باز شد'
   end

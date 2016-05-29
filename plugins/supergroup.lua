@@ -459,11 +459,11 @@ local function lock_group_tag(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_tag_lock = data[tostring(target)]['settings']['lock_tag']
+  local group_tag_lock = data[tostring(target)]['settings']['tag']
   if group_tag_lock == '🔒' then
     return 'تگ گذاشتن در حال حاظر ممنوع است'
   else
-    data[tostring(target)]['settings']['lock_tag'] = '🔒'
+    data[tostring(target)]['settings']['tag'] = '🔒'
     save_data(_config.moderation.data, data)
     return 'تگ گذاشتن ممنوع شد'
   end
@@ -472,11 +472,11 @@ local function unlock_group_tag(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_tag_lock = data[tostring(target)]['settings']['lock_tag']
+  local group_tag_lock = data[tostring(target)]['settings']['tag']
   if group_tag_lock == '🔒' then
     return 'تگ گذاشتن در حال حاظر مجاز است'
   else
-    data[tostring(target)]['settings']['lock_tag'] = '🔒'
+    data[tostring(target)]['settings']['tag'] = '🔒'
     save_data(_config.moderation.data, data)
     return 'تگ گذاشتن مجاز شد'
   end

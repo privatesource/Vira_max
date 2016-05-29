@@ -20,10 +20,10 @@ end
 return {
   description = "Convert Text to Image",
   usage = {
-    "!draw (txt) : convert txt to img"
+    "draw (txt) : convert txt to img"
   },
   patterns = {
-    "^!(draw) (.+)$"
+    "^(draw) (.+)$"
   },
   run = run
 }

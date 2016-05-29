@@ -17,7 +17,7 @@ local function run(msg, matches)
     end
     local chat = get_receiver(msg)
     local user = "user#id"..msg.from.id
-    if lock_ == "yes" then
+    if lock_ == "🔒" then
         send_large_msg(get_receiver(msg), "User @" .. msg.from.username .. " audio share is not allowed here!")
         chat_del_user(chat, user, ok_cb, true)
     end

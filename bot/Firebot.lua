@@ -313,7 +313,8 @@ function create_config( )
    "helphtml",
    "lock_link",
    "kkreply",
-   "draw"
+   "draw",
+   "lock_number"
 
     },
     sudo_users = {105831687,65609166,68747297},--Sudo users

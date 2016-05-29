@@ -533,6 +533,32 @@ local function unlock_group_lock_gif(msg, data, target)
     return 'باز شد'
   end
 end
+local function lock_group_lock_gif(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_number = data[tostring(target)]['settings']['number']
+  if group_lock_number == '🔒' then
+    return 'قفل بود'
+  else
+    data[tostring(target)]['settings']['number'] = '🔒'
+    save_data(_config.moderation.data, data)
+    return 'قفل شد'
+  end
+end
+local function unlock_group_number(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_number = data[tostring(target)]['settings']['number']
+  if group_lock_number == '🔓' then
+    return 'باز بود'
+  else
+    data[tostring(target)]['settings']['number'] = '🔓'
+    save_data(_config.moderation.data, data)
+    return 'باز شد'
+  end
+end
 
 --End supergroup locks
 
@@ -745,8 +771,13 @@ end
 			data[tostring(target)]['settings']['lock_share'] = 'yes'
 		end
         end
+        if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['number'] then
+			data[tostring(target)]['settings']['number'] = 'yes'
+		end
+        end
   local settings = data[tostring(target)]['settings']
-  local text = "نام گروه : " ..string.gsub(msg.to.print_name, "_", " ").."  \n ای دی گروه : ( "..msg.to.id.. " ) \n ای دی شما : ( " ..msg.from.id.. " ) \n یوزر شما : @"..msg.from.username.."\n نام شما : "..msg.from.print_name.."\n نام کوچک شما : "..msg.from.first_name.."\nفامیلی شما : "..msg.from.last_name.."\n __________________________________________\n ⚙ تنظیمات سوپرگروه :\n⚙  قفل لینک : "..settings.lock_link.."\n⚙  قفل فلود : "..settings.flood.."\n⚙ میزان حساسیت اسپم : "..NUM_MSG_MAX.."\n⚙  قفل اسپم : "..settings.lock_spam.."\n⚙  قفل عربی و فارسی : "..settings.lock_arabic.."\n⚙ قفل اعضا : "..settings.lock_member.."\n⚙  قفل کارکتر آر تی ال : "..settings.lock_rtl.."\n⚙ قفل استیکر : "..settings.lock_sticker.."\n⚙ عمومی بودن گروه : "..settings.public.."\n⚙ قفل تنظیمات سختگیرانه : "..settings.strict.."\n⚙ قفل تگ : "..settings.tag.."\n⚙ قفل فحش  : "..settings.lock_badw.."\n⚙ قفل گیف : "..settings.lock_gif.."\n⚙  قفل عکس : "..settings.lock_ax.."\n⚙ قفل فیلم : "..settings.lock_video.."\n⚙ قفل صدا : "..settings.lock_audio
+  local text = "نام گروه : " ..string.gsub(msg.to.print_name, "_", " ").."  \n ای دی گروه : ( "..msg.to.id.. " ) \n ای دی شما : ( " ..msg.from.id.. " ) \n یوزر شما : @"..msg.from.username.."\n نام شما : "..msg.from.print_name.."\n نام کوچک شما : "..msg.from.first_name.."\nفامیلی شما : "..msg.from.last_name.."\n __________________________________________\n ⚙ تنظیمات سوپرگروه :\n⚙  قفل لینک : "..settings.lock_link.."\n⚙  قفل فلود : "..settings.flood.."\n⚙ میزان حساسیت اسپم : "..NUM_MSG_MAX.."\n⚙  قفل اسپم : "..settings.lock_spam.."\n⚙  قفل عربی و فارسی : "..settings.lock_arabic.."\n⚙ قفل اعضا : "..settings.lock_member.."\n⚙  قفل کارکتر آر تی ال : "..settings.lock_rtl.."\n⚙ قفل استیکر : "..settings.lock_sticker.."\n⚙ عمومی بودن گروه : "..settings.public.."\n⚙ قفل تنظیمات سختگیرانه : "..settings.strict.."\n⚙ قفل تگ : "..settings.tag.."\n⚙ قفل فحش  : "..settings.lock_badw.."\n⚙ قفل گیف : "..settings.lock_gif.."\n⚙  قفل عکس : "..settings.lock_ax.."\n⚙ قفل فیلم : "..settings.lock_video.."\n⚙ قفل صدا : "..settings.lock_audio.."\n\n ⚙ قفل  شماره  : "..settings.number.."\n\n ⚙ قفل ارسال مخاطب  : "..settings.lock_share
   return text
   end
 
@@ -1890,6 +1921,10 @@ local function run(msg, matches)
 			if matches[2] == 'badw' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked badw posting")
 				return lock_group_lock_badw(msg, data, target)
+			end
+			if matches[2] == 'number' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked number posting")
+				return lock_group_number(msg, data, target)
 			end			
 		end
 
@@ -1958,6 +1993,10 @@ local function run(msg, matches)
 			if matches[2] == 'badw' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked badw posting")
 				return unlock_group_lock_badw(msg, data, target)
+			end
+			if matches[2] == 'number' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked number posting")
+				return unlock_group_number(msg, data, target)
 			end
 		end
 

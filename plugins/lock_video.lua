@@ -17,7 +17,7 @@ local function run(msg, matches)
     end
     local chat = get_receiver(msg)
     local user = "user#id"..msg.from.id
-    if lock_video == "yes" then
+    if lock_video == "🔒" then
         send_large_msg(get_receiver(msg), "User @" .. msg.from.username .. " video share is not allowed here!")
         chat_del_user(chat, user, ok_cb, true)
     end

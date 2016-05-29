@@ -5,7 +5,7 @@ local function run(msg, matches)
   end
 local data = load_data(_config.moderation.data)
 if data[tostring(msg.to.id)]['settings']['tag'] then
-if data[tostring(msg.to.id)]['settings']['tag'] == 'yes' then
+if data[tostring(msg.to.id)]['settings']['tag'] == '🔒' then
 if antitag[msg.from.id] == true then
 delete_msg(msg.id, ok_cb, true)
 return

@@ -768,12 +768,12 @@ end
         end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_share'] then
-			data[tostring(target)]['settings']['lock_share'] = 'yes'
+			data[tostring(target)]['settings']['lock_share'] = '🔓'
 		end
         end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['number'] then
-			data[tostring(target)]['settings']['number'] = 'yes'
+			data[tostring(target)]['settings']['number'] = '🔓'
 		end
         end
   local settings = data[tostring(target)]['settings']

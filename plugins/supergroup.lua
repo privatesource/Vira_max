@@ -5,7 +5,7 @@ local function check_member_super(cb_extra, success, result)
   local data = cb_extra.data
   local msg = cb_extra.msg
   if success == 0 then
-	send_large_msg(receiver, "اول من را مدیر کنید")
+	send_large_msg(receiver, "promote me firts")
   end
   for k,v in pairs(result) do
     local member_id = v.peer_id
@@ -1033,7 +1033,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "____________________\n⚙SuperGroup settings⚙:⬇️\n____________________\n>Lock links : "..settings.lock_link.."\n>Lock contacts: "..settings.lock_contacts.."\n>Lock flood: "..settings.flood.."\n>Flood sensitivity : "..NUM_MSG_MAX.."\n>Lock spam: "..settings.lock_spam.."\n>Lock Arabic: "..settings.lock_arabic.."\n>Lock Member: "..settings.lock_member.."\n>Lock RTL: "..settings.lock_rtl.."\n>Lock Tgservice: "..settings.lock_tgservice.."\n>Lock sticker: "..settings.lock_sticker.."\n>Lock tag(#): "..settings.tag.."\n>Lock emoji: "..settings.emoji.."\n>Lock english: "..settings.english.."\n>Lock fwd(forward): "..settings.fwd.."\n>Lock reply: "..settings.reply.."\n>Lock join: "..settings.join.."\n>Lock username(@): "..settings.username.."\n>Lock media: "..settings.media.."\n>Lock fosh: "..settings.fosh.."\n>Lock leave: "..settings.leave.."\n>Lock bots: "..bots_protection.."\n>Lock operator: "..settings.operator.."\n____________________\n⚙Easy Sweet&Faster Switch⚙:⬇️\n____________________\n>Switch Model Etehad: "..settings.etehad.."\n>Lock all: "..settings.all.."\n____________________\nℹ️About Groupℹ️:⬇️\n____________________\n>group type: "..gp_type.."\n>Public: "..settings.public.."\n>Strict settings: "..settings.strict.."\n____________________\n>>bot version : v2.9<<\n>>>👑MeGa shield👑<<<\n>>@shieldTM<<"
+  local text = "____________________\n⚙SuperGroup settings⚙:⬇️\n____________________\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock contacts: "..settings.lock_contacts.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag(#): "..settings.tag.."\n⚙Lock emoji: "..settings.emoji.."\n ⚙Lock english: "..settings.english.."\n⚙Lock fwd(forward): "..settings.fwd.."\n⚙Lock reply: "..settings.reply.."\n⚙Lock join: "..settings.join.."\n⚙ Lock username(@): "..settings.username.."\n⚙Lock media: "..settings.media.."\n⚙Lock fosh: "..settings.fosh.."\n⚙Lock leave: "..settings.leave.."\n⚙ Lock bots: "..bots_protection.."\n⚙Lock operator: "..settings.operator.."\ngroup type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.." ____________________\n⚙ Switch⚙:⬇️\n____________________\n⚙ Switch Model Etehad: "..settings.etehad.."\n⚙Lock all: "..settings.all.."\n \n____________________\n\n bot version : v2 Fire Bot"
   return text
 end
 

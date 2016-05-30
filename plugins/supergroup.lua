@@ -200,6 +200,33 @@ local function unlock_group_links(msg, data, target)
     return 'لینک گذاشتن مجاز شد'
   end
 end
+local function lock_group_all(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_all_lock = data[tostring(target)]['settings']['all']
+  if group_all_lock == '🔒' then
+    return 'all setting is already locked'
+  else
+    data[tostring(target)]['settings']['all'] = '🔒'
+    save_data(_config.moderation.data, data)
+    return 'all setting has been locked'
+  end
+end
+
+local function unlock_group_all(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_all_lock = data[tostring(target)]['settings']['all']
+  if group_all_lock == '🔒' then
+    return 'all setting is not locked'
+  else
+    data[tostring(target)]['settings']['all'] = '🔒'
+    save_data(_config.moderation.data, data)
+    return 'all setting has been unlocked'
+  end
+end
 
 local function lock_group_spam(msg, data, target)
   if not is_momod(msg) then
@@ -777,7 +804,7 @@ end
 		end
         end
   local settings = data[tostring(target)]['settings']
-  local text = "نام گروه : " ..string.gsub(msg.to.print_name, "_", " ").."  \n ای دی گروه : ( "..msg.to.id.. " ) \n ای دی شما : ( " ..msg.from.id.. " ) \n یوزر شما : @"..msg.from.username.."\n نام شما : "..msg.from.print_name.."\n نام کوچک شما : "..msg.from.first_name.."\nفامیلی شما : "..msg.from.last_name.."\n __________________________________________\n ⚙ تنظیمات سوپرگروه :\n⚙  قفل لینک : "..settings.lock_link.."\n⚙  قفل فلود : "..settings.flood.."\n⚙ میزان حساسیت اسپم : "..NUM_MSG_MAX.."\n⚙  قفل اسپم : "..settings.lock_spam.."\n⚙  قفل عربی و فارسی : "..settings.lock_arabic.."\n⚙ قفل اعضا : "..settings.lock_member.."\n⚙  قفل کارکتر آر تی ال : "..settings.lock_rtl.."\n⚙ قفل استیکر : "..settings.lock_sticker.."\n⚙ عمومی بودن گروه : "..settings.public.."\n⚙ قفل تنظیمات سختگیرانه : "..settings.strict.."\n⚙ قفل تگ : "..settings.tag.."\n⚙ قفل فحش  : "..settings.lock_badw.."\n⚙ قفل گیف : "..settings.lock_gif.."\n⚙  قفل عکس : "..settings.lock_ax.."\n⚙ قفل فیلم : "..settings.lock_video.."\n⚙ قفل صدا : "..settings.lock_audio.."\n ⚙ قفل  شماره  : "..settings.number.."\n ⚙ قفل ارسال مخاطب  : "..settings.lock_share
+  local text = "نام گروه : " ..string.gsub(msg.to.print_name, "_", " ").."  \n ای دی گروه : ( "..msg.to.id.. " ) \n ای دی شما : ( " ..msg.from.id.. " ) \n یوزر شما : @"..msg.from.username.."\n نام شما : "..msg.from.print_name.."\n نام کوچک شما : "..msg.from.first_name.."\nفامیلی شما : "..msg.from.last_name.."\n __________________________________________\n  سویچ ها : \n🗝 قفل همه : "..settings.all.."\n__________________________________________\n ⚙ تنظیمات سوپرگروه :\n⚙  قفل لینک : "..settings.lock_link.."\n⚙  قفل فلود : "..settings.flood.."\n⚙ میزان حساسیت اسپم : "..NUM_MSG_MAX.."\n⚙  قفل اسپم : "..settings.lock_spam.."\n⚙  قفل عربی و فارسی : "..settings.lock_arabic.."\n⚙ قفل اعضا : "..settings.lock_member.."\n⚙  قفل کارکتر آر تی ال : "..settings.lock_rtl.."\n⚙ قفل استیکر : "..settings.lock_sticker.."\n⚙ عمومی بودن گروه : "..settings.public.."\n⚙ قفل تنظیمات سختگیرانه : "..settings.strict.."\n⚙ قفل تگ : "..settings.tag.."\n⚙ قفل فحش  : "..settings.lock_badw.."\n⚙ قفل گیف : "..settings.lock_gif.."\n⚙  قفل عکس : "..settings.lock_ax.."\n⚙ قفل فیلم : "..settings.lock_video.."\n⚙ قفل صدا : "..settings.lock_audio.."\n ⚙ قفل  شماره  : "..settings.number.."\n ⚙ قفل ارسال مخاطب  : "..settings.lock_share
   return text
   end
 
@@ -1858,6 +1885,30 @@ local function run(msg, matches)
 
 		if matches[1] == 'lock' and is_momod(msg) then
 			local target = msg.to.id
+			     if matches[2] == 'all' then
+      	local safemode ={
+		lock_group_tag(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_flood(msg, data, target),
+		lock_group_arabic(msg, data, target),
+		lock_group_membermod(msg, data, target),
+		lock_group_rtl(msg, data, target),
+		lock_group_tgservice(msg, data, target),
+		lock_group_sticker(msg, data, target),
+		lock_group_share(msg, data, target),
+		lock_group_join(msg, data, target),
+		lock_group_video(msg, data, target),
+		lock_group_gif(msg, data, target),
+		lock_group_badw(msg, data, target),
+		lock_group_ax(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_links(msg, data, target),
+		lock_group_strict(msg, data, target),
+		lock_group_audio(msg, data, target),
+		lock_group_number(msg, data, target),
+      	}
+      	return lock_group_all(msg, data, target), safemode
+      end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
@@ -1930,6 +1981,30 @@ local function run(msg, matches)
 
 		if matches[1] == 'unlock' and is_momod(msg) then
 			local target = msg.to.id
+			     if matches[2] == 'all' then
+      	local dsafemode ={
+		unlock_group_tag(msg, data, target),
+		unlock_group_spam(msg, data, target),
+		unlock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		unlock_group_membermod(msg, data, target),
+		unlock_group_rtl(msg, data, target),
+		unlock_group_tgservice(msg, data, target),
+		unlock_group_sticker(msg, data, target),
+		unlock_group_share(msg, data, target),
+		unlock_group_join(msg, data, target),
+		unlock_group_video(msg, data, target),
+		unlock_group_gif(msg, data, target),
+		unlock_group_badw(msg, data, target),
+		unlock_group_ax(msg, data, target),
+		unlock_group_leave(msg, data, target),
+		unlock_group_links(msg, data, target),
+		unlock_group_strict(msg, data, target),
+		unlock_group_audio(msg, data, target),
+		unlock_group_number(msg, data, target),
+      	}
+      	return unlock_group_all(msg, data, target), dsafemode
+      end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")
 				return unlock_group_links(msg, data, target)

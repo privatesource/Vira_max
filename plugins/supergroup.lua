@@ -229,31 +229,31 @@ local function unlock_group_all(msg, data, target)
   end
 end
 
-local function lock_group_etehad(msg, data, target)
+local function lock_group_friend(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_etehad_lock = data[tostring(target)]['settings']['etehad']
-  if group_etehad_lock == '🔒' then
-    return 'etehad setting is already locked'
+  local group_friend_lock = data[tostring(target)]['settings']['friend']
+  if group_friend_lock == '🔒' then
+    return 'friend setting is already locked'
   else
-    data[tostring(target)]['settings']['etehad'] = '🔒'
+    data[tostring(target)]['settings']['friend'] = '🔒'
     save_data(_config.moderation.data, data)
-    return 'etehad setting has been locked'
+    return 'friend setting has been locked'
   end
 end
 
-local function unlock_group_etehad(msg, data, target)
+local function unlock_group_friend(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_etehad_lock = data[tostring(target)]['settings']['etehad']
-  if group_etehad_lock == '🔓' then
-    return 'etehad setting is not locked'
+  local group_friend_lock = data[tostring(target)]['settings']['friend']
+  if group_friend_lock == '🔓' then
+    return 'friend setting is not locked'
   else
-    data[tostring(target)]['settings']['etehad'] = '🔓'
+    data[tostring(target)]['settings']['friend'] = '🔓'
     save_data(_config.moderation.data, data)
-    return 'etehad setting has been unlocked'
+    return 'friend setting has been unlocked'
   end
 end
 
@@ -1026,14 +1026,14 @@ function show_supergroup_settingsmod(msg, target)
 		end
 	end
 	if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['etehad'] then
-			data[tostring(target)]['settings']['etehad'] = '🔓'
+		if not data[tostring(target)]['settings']['friend'] then
+			data[tostring(target)]['settings']['friend'] = '🔓'
 		end
 	end
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock contacts: "..settings.lock_contacts.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag : "..settings.tag.."\n⚙group type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.."\n _____________________________\n\n🗝Switch:\n🗝Switch Model Etehad: "..settings.etehad.."\n🗝Lock all: "..settings.all.."\n \n\n\n bot version : v2 Fire Bot"
+  local text = "⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock contacts: "..settings.lock_contacts.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag : "..settings.tag.."\n⚙group type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.."\n _____________________________\n\n🗝Switch:\n🗝 friend: "..settings.friend.."\n🗝all: "..settings.all.."\n \n\n\n bot version : v2 Fire Bot"
   return text
 end
 
@@ -2140,8 +2140,8 @@ local function run(msg, matches)
       	}
       	return lock_group_all(msg, data, target), safemode
       end
-			     if matches[2] == 'etehad' then
-      	local etehad ={
+			     if matches[2] == 'friend' then
+      	local friend ={
         unlock_group_links(msg, data, target),
 		lock_group_tag(msg, data, target),
 		lock_group_spam(msg, data, target),
@@ -2164,8 +2164,9 @@ local function run(msg, matches)
 		lock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
       	}
-      	return lock_group_etehad(msg, data, target), etehad
+      	return lock_group_friend(msg, data, target), friend
       end
+                            
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
@@ -2284,8 +2285,8 @@ local function run(msg, matches)
       	}
       	return unlock_group_all(msg, data, target), dsafemode
       end
-	  	if matches[2] == 'etehad' then
-      	local detehad ={
+	  	if matches[2] == 'friend' then
+      	local dfriend ={
         lock_group_links(msg, data, target),
 		unlock_group_tag(msg, data, target),
 		lock_group_spam(msg, data, target),
@@ -2308,7 +2309,7 @@ local function run(msg, matches)
 		unlock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
       	}
-      	return unlock_group_etehad(msg, data, target), detehad
+      	return unlock_group_friend(msg, data, target), dfriend
       end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")

@@ -745,52 +745,52 @@ function show_supergroup_settingsmod(msg, target)
     end
 	if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['public'] then
-			data[tostring(target)]['settings']['public'] = 'no'
+			data[tostring(target)]['settings']['public'] = '🔓'
 		end
 	end
 	if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_rtl'] then
-			data[tostring(target)]['settings']['lock_rtl'] = 'no'
+			data[tostring(target)]['settings']['lock_rtl'] = '🔓'
 		end
 end
       if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_tgservice'] then
-			data[tostring(target)]['settings']['lock_tgservice'] = 'no'
+			data[tostring(target)]['settings']['lock_tgservice'] = '🔓'
 		end
 	end
 	if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_member'] then
-			data[tostring(target)]['settings']['lock_member'] = 'no'
+			data[tostring(target)]['settings']['lock_member'] = '🔓'
 		end
         end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['tag'] then
-			data[tostring(target)]['settings']['tag'] = 'yes'
+			data[tostring(target)]['settings']['tag'] = '🔒'
 		end
         end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_badw'] then
-			data[tostring(target)]['settings']['lock_badw'] = 'yes'
+			data[tostring(target)]['settings']['lock_badw'] = '🔒'
 		end
         end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_gif'] then
-			data[tostring(target)]['settings']['lock_gif'] = 'yes'
+			data[tostring(target)]['settings']['lock_gif'] = '🔒'
 		end
         end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_ax'] then
-			data[tostring(target)]['settings']['lock_ax'] = 'yes'
+			data[tostring(target)]['settings']['lock_ax'] = '🔒'
 		end
         end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_video'] then
-			data[tostring(target)]['settings']['lock_video'] = 'yes'
+			data[tostring(target)]['settings']['lock_video'] = '🔒'
 		end
         end
         if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_audio'] then
-			data[tostring(target)]['settings']['lock_audio'] = 'yes'
+			data[tostring(target)]['settings']['lock_audio'] = '🔒'
 		end
         end
         if data[tostring(target)]['settings'] then

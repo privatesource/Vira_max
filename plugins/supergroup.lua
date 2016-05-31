@@ -875,6 +875,32 @@ local function unlock_group_lock_ax(msg, data, target)
     return 'باز شد'
   end
 end
+local function lock_group_lock_audio(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_audio_lock = data[tostring(target)]['settings']['lock_audio']
+  if group_lock_audio_lock == '🔒' then
+    return 'قفل بود'
+  else
+    data[tostring(target)]['settings']['lock_audio'] = '🔒'
+    save_data(_config.moderation.data, data)
+    return 'قفل شد'
+  end
+end
+local function unlock_group_lock_audio(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_audio_lock = data[tostring(target)]['settings']['lock_audio']
+  if group_lock_audio_lock == '🔒' then
+    return 'باز بود'
+  else
+    data[tostring(target)]['settings']['lock_audio'] = '🔒'
+    save_data(_config.moderation.data, data)
+    return 'باز شد'
+  end
+end
 
 local function unlock_group_contacts(msg, data, target)
   if not is_momod(msg) then
@@ -1163,6 +1189,11 @@ function show_supergroup_settingsmod(msg, target)
 	  if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_ax'] then
 			data[tostring(target)]['settings']['lock_ax'] = '🔓'
+		end
+        end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_audio'] then
+			data[tostring(target)]['settings']['lock_audio'] = '🔓'
 		end
 	end
 	if data[tostring(target)]['settings'] then
@@ -2427,6 +2458,10 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked video posting")
 				return lock_group_lock_video(msg, data, target)
 			end
+			if matches[2] == 'audio' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked audio posting")
+				return lock_group_lock_audio(msg, data, target)
+			end
 			if matches[2] == 'pic' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked pic posting")
 				return lock_group_lock_ax(msg, data, target)
@@ -2608,6 +2643,10 @@ local function run(msg, matches)
 			if matches[2] == 'video' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked video posting")
 				return unlock_group_lock_video(msg, data, target)
+			end
+			if matches[2] == 'audio' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked audio posting")
+				return unlock_group_lock_audio(msg, data, target)
 			end
 			if matches[2] == 'pic' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked pic posting")

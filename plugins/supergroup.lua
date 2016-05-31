@@ -1136,7 +1136,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "🔶sepergroup name :"..msg.to.print_name.."\n🔷requester :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\nlock bots : "..settings.lock_bots.."\n _____________________________\n\n🗝Switch:\n🗝 friend: "..settings.friend.."\n 🗝all: "..settings.all.."\n\n bot version : v2 \n 🔥Fire Bot🔥"
+  local text = "🔶sepergroup name :"..msg.to.print_name.."\n🔷requester :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙: bot version : v2 \n 🔥Fire Bot🔥"
   return text
 end
 

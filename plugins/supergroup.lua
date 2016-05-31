@@ -27,7 +27,7 @@ local function check_member_super(cb_extra, success, result)
 		  public = 'no',
 		  lock_rtl = 'no',
 		  lock_tgservice = 'yes',
-		  lock_contacts = 'no',
+		  lock_share = 'no',
 		  strict = 'no'
         }
       }
@@ -807,15 +807,15 @@ local function unlock_group_bots(msg, data, target)
   end
 end
 
-local function lock_group_contacts(msg, data, target)
+local function lock_group_share(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_rtl_lock = data[tostring(target)]['settings']['lock_contacts']
-  if group_contacts_lock == '🔒' then
+  local group_rtl_lock = data[tostring(target)]['settings']['lock_share']
+  if group_share_lock == '🔒' then
     return 'Contact posting is already locked'
   else
-    data[tostring(target)]['settings']['lock_contacts'] = '🔒'
+    data[tostring(target)]['settings']['lock_share'] = '🔒'
     save_data(_config.moderation.data, data)
     return 'Contact posting has been locked'
   end
@@ -874,15 +874,15 @@ local function unlock_group_lock_audio(msg, data, target)
   end
 end
 
-local function unlock_group_contacts(msg, data, target)
+local function unlock_group_share(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_contacts_lock = data[tostring(target)]['settings']['lock_contacts']
-  if group_contacts_lock == '🔓' then
+  local group_share_lock = data[tostring(target)]['settings']['lock_share']
+  if group_share_lock == '🔓' then
     return 'Contact posting is already unlocked'
   else
-    data[tostring(target)]['settings']['lock_contacts'] = '🔓'
+    data[tostring(target)]['settings']['lock_share'] = '🔓'
     save_data(_config.moderation.data, data)
     return 'Contact posting has been unlocked'
   end
@@ -1136,7 +1136,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "🔶sepergroup name :"..msg.to.print_name.."\n🔷requester :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock contacts: "..settings.lock_contacts.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag : "..settings.tag.."\n⚙group type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.."\n⚙lock bots : "..settings.lock_bots.."\n _____________________________ \n\n ⚠️media locks : \n\n🔧lock gif : "..settings.lock_gif.."\n🔧lock pic : "..settings.lock_ax.." \n🔧 lock video : "..settings.lock_video.."\n🔧lock all media : "..settings.lock_media.."\n _____________________________\n\n🗝Switch:\n🗝 \n 🔥Fire Bot🔥"
+  local text = "🔶sepergroup name :"..msg.to.print_name.."\n🔷requester :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock share: "..settings.lock_share.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag : "..settings.tag.."\n⚙group type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.."\n⚙lock bots : "..settings.lock_bots.."\n _____________________________ \n\n ⚠️media locks : \n\n🔧lock gif : "..settings.lock_gif.."\n🔧lock pic : "..settings.lock_ax.." \n🔧 lock video : "..settings.lock_video.."\n🔧lock all media : "..settings.lock_media.."\n _____________________________\n\n🗝Switch:\n🗝 \n 🔥Fire Bot🔥"
   return text
 end
 
@@ -2227,7 +2227,7 @@ local function run(msg, matches)
 		lock_group_rtl(msg, data, target),
 		lock_group_tgservice(msg, data, target),
 		lock_group_sticker(msg, data, target),
-		lock_group_contacts(msg, data, target),
+		lock_group_share(msg, data, target),
 		lock_group_english(msg, data, target),
 		lock_group_fwd(msg, data, target),
 		lock_group_reply(msg, data, target),
@@ -2253,7 +2253,7 @@ local function run(msg, matches)
 		unlock_group_rtl(msg, data, target),
 		lock_group_tgservice(msg, data, target),
 		lock_group_sticker(msg, data, target),
-		unlock_group_contacts(msg, data, target),
+		unlock_group_share(msg, data, target),
 		unlock_group_english(msg, data, target),
 		unlock_group_fwd(msg, data, target),
 		unlock_group_reply(msg, data, target),
@@ -2309,9 +2309,9 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked sticker posting")
 				return lock_group_sticker(msg, data, target)
 			end
-			if matches[2] == 'contacts' then
+			if matches[2] == 'share' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked contact posting")
-				return lock_group_contacts(msg, data, target)
+				return lock_group_share(msg, data, target)
 			end
 			if matches[2] == 'strict' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked enabled strict settings")
@@ -2388,7 +2388,7 @@ local function run(msg, matches)
 		unlock_group_rtl(msg, data, target),
 		unlock_group_tgservice(msg, data, target),
 		unlock_group_sticker(msg, data, target),
-		unlock_group_contacts(msg, data, target),
+		unlock_group_share(msg, data, target),
 		unlock_group_english(msg, data, target),
 		unlock_group_fwd(msg, data, target),
 		unlock_group_reply(msg, data, target),
@@ -2414,7 +2414,7 @@ local function run(msg, matches)
 		unlock_group_rtl(msg, data, target),
 		unlock_group_tgservice(msg, data, target),
 		unlock_group_sticker(msg, data, target),
-		unlock_group_contacts(msg, data, target),
+		unlock_group_share(msg, data, target),
 		unlock_group_english(msg, data, target),
 		unlock_group_fwd(msg, data, target),
 		unlock_group_reply(msg, data, target),
@@ -2470,9 +2470,9 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked sticker posting")
 				return unlock_group_sticker(msg, data, target)
 			end
-			if matches[2] == 'contacts' then
+			if matches[2] == 'share' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked contact posting")
-				return unlock_group_contacts(msg, data, target)
+				return unlock_group_share(msg, data, target)
 			end
 			if matches[2] == 'strict' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked disabled strict settings")

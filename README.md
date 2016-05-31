@@ -1,6 +1,12 @@
 # Fire Bot
 
-[![https://yago.me/tg-bot](https://img.shields.io/badge/💬_Telegram-Fire Bot-blue.svg)](https://telegram.me/avirabot)
+created by Lua_PYthon
+xml _ php _ html in the bot ...
+
+changed lince for #UnFriendly
+changed TG for #UnFriendly
+edit bot.lua with github by  #UnFriendly
+
 
 **An advanced and powerful administration bot based on [yagop/telegram-bot](https://github.com/yagop/telegram-bot) licensed under the [GNU General Public License](https://github.com/SEEDTEAM/TeleSeed/blob/master/LICENSE)**.
 # Features

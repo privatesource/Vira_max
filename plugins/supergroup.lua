@@ -2395,6 +2395,7 @@ local function run(msg, matches)
 			if matches[2] == 'pic' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked pic posting")
 				return lock_group_lock_ax(msg, data, target)
+	           	end
 		end
 
 		if matches[1] == 'unlock' and is_momod(msg) then
@@ -2572,7 +2573,8 @@ local function run(msg, matches)
 			if matches[2] == 'pic' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked pic posting")
 				return unlock_group_lock_ax(msg, data, target)
-		end
+		        end
+                end
 
 		if matches[1] == 'setflood' then
 			if not is_momod(msg) then

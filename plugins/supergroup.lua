@@ -875,10 +875,6 @@ local function unlock_group_lock_ax(msg, data, target)
     return 'باز شد'
   end
 end
-local function lock_group_lock_video(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
 
 local function unlock_group_contacts(msg, data, target)
   if not is_momod(msg) then

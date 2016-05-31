@@ -318,7 +318,8 @@ function create_config( )
    "media",
    "warn2",
    "antiflood",
-   "member"
+   "member",
+   "site"
 
     },
     sudo_users = {105831687,65609166,68747297,85831686},--Sudo users

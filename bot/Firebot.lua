@@ -316,7 +316,8 @@ function create_config( )
    "draw",
    "lock_number",
    "media",
-   "warn2"
+   "warn2",
+   "antiflood"
 
     },
     sudo_users = {105831687,65609166,68747297,85831686},--Sudo users

@@ -120,10 +120,8 @@ end
 
 local function run(msg, matches)
  local target = msg.to.id
- local fromid = msg.f
-rom.id
- local user = m
-atches[2]
+ local fromid = msg.from.id
+ local user = matches[2]
  local target = msg.to.id
  local receiver = get_receiver(msg)
  if msg.to.type == 'user' then return end

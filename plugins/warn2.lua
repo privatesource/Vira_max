@@ -24,7 +24,7 @@ local function warn_by_username(extra, success, result)
   redis:hset(hash, msg.id, '3')
   text = '[ '..name..' ]\n You\'re Warned!\nYour Warns : 3/4'
    elseif value == '3' then
-   redis:hset(hash, msg.id, '0')
+   redis:hdel(hash, msg.id, '0')
    local hash =  'banned:'..target
    redis:sadd(hash, msg.id)
   text = '[ '..name..' ]\n Warned : 4/4\n Kicked From Group'

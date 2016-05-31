@@ -1147,8 +1147,8 @@ function show_supergroup_settingsmod(msg, target)
 		end
 	end
 	  if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['media'] then
-			data[tostring(target)]['settings']['media'] = '🔓'
+		if not data[tostring(target)]['settings']['lock_media'] then
+			data[tostring(target)]['settings']['lock_media'] = '🔓'
 		end
 	end
 	  if data[tostring(target)]['settings'] then
@@ -1203,7 +1203,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "🔶sepergroup name :"..msg.to.print_name.."\n 🔷supergroup id :"..msg.to.id.."\n🔶your name : "..msg.from.print_name.."\n 🔷your first name : "..msg.from.first_name.."\n 🔶your last name :"..msg.from.last_name.."\n 🔷your username :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock contacts: "..settings.lock_contacts.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag : "..settings.tag.."\n⚙group type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.."\n _____________________________ \n\n ⚠️media locks : \n\n🔧lock gif : "..settings.lock_gif.."\n🔧lock pic : "..settings.lock_ax.." \n🔧 lock video : "..settings.lock_video.."\n _____________________________\n\n🗝Switch:\n🗝 friend: "..settings.friend.."\n 🗝all: "..settings.all.."\n\n bot version : v2 \n 🔥Fire Bot🔥"
+  local text = "🔶sepergroup name :"..msg.to.print_name.."\n 🔷supergroup id :"..msg.to.id.."\n🔶your name : "..msg.from.print_name.."\n 🔷your first name : "..msg.from.first_name.."\n 🔶your last name :"..msg.from.last_name.."\n 🔷your username :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock contacts: "..settings.lock_contacts.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag : "..settings.tag.."\n⚙group type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.."\n _____________________________ \n\n ⚠️media locks : \n\n🔧lock gif : "..settings.lock_gif.."\n🔧lock pic : "..settings.lock_ax.." \n🔧 lock video : "..settings.lock_video.."\n🔧lock all media : "..settings.lock_media.."\n _____________________________\n\n🗝Switch:\n🗝 friend: "..settings.friend.."\n 🗝all: "..settings.all.."\n\n bot version : v2 \n 🔥Fire Bot🔥"
   return text
 end
 
@@ -2302,7 +2302,7 @@ local function run(msg, matches)
 		lock_group_emoji(msg, data, target),
 		lock_group_username(msg, data, target),
 		lock_group_fosh(msg, data, target),
-		lock_group_media(msg, data, target),
+		lock_group_lock_media(msg, data, target),
 		lock_group_leave(msg, data, target),
 		lock_group_bots(msg, data, target),
 		lock_group_operator(msg, data, target),
@@ -2328,7 +2328,7 @@ local function run(msg, matches)
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
 		lock_group_fosh(msg, data, target),
-		unlock_group_media(msg, data, target),
+		unlock_group_lock_media(msg, data, target),
 		lock_group_leave(msg, data, target),
 		lock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
@@ -2354,7 +2354,7 @@ local function run(msg, matches)
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
 		unlock_group_fosh(msg, data, target),
-		unlock_group_media(msg, data, target),
+		unlock_group_lock_media(msg, data, target),
 		unlock_group_leave(msg, data, target),
 		unlock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
@@ -2432,7 +2432,7 @@ local function run(msg, matches)
 			end
 			if matches[2] == 'media' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked media")
-				return lock_group_media(msg, data, target)
+				return lock_group_lock_media(msg, data, target)
 			end
 			if matches[2] == 'username' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked username")
@@ -2489,7 +2489,7 @@ local function run(msg, matches)
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
 		unlock_group_fosh(msg, data, target),
-		unlock_group_media(msg, data, target),
+		unlock_group_lock_media(msg, data, target),
 		unlock_group_leave(msg, data, target),
 		unlock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
@@ -2515,7 +2515,7 @@ local function run(msg, matches)
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
 		unlock_group_fosh(msg, data, target),
-		unlock_group_media(msg, data, target),
+		unlock_group_lock_media(msg, data, target),
 		unlock_group_leave(msg, data, target),
 		unlock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
@@ -2541,7 +2541,7 @@ local function run(msg, matches)
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
 		lock_group_fosh(msg, data, target),
-		unlock_group_media(msg, data, target),
+		unlock_group_lock_media(msg, data, target),
 		lock_group_leave(msg, data, target),
 		lock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
@@ -2618,7 +2618,7 @@ local function run(msg, matches)
 			end
 			if matches[2] == 'media' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked media")
-				return unlock_group_media(msg, data, target)
+				return unlock_group_lock_media(msg, data, target)
 			end
 			if matches[2] == 'username' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked disabled username")

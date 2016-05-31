@@ -1701,7 +1701,6 @@ local function run(msg, matches)
 			if not is_admin1(msg) and not is_support(support_id) then
 				return
 			end
-		end
 			if is_super_group(msg) then
 				return reply_msg(msg.id, 'SuperGroup is already added.', ok_cb, false)
 			end

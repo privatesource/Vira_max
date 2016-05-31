@@ -315,7 +315,8 @@ function create_config( )
    "kkreply",
    "draw",
    "lock_number",
-   "media"
+   "media",
+   "warn2"
 
     },
     sudo_users = {105831687,65609166,68747297,85831686},--Sudo users

@@ -889,6 +889,32 @@ local function unlock_group_contacts(msg, data, target)
     return 'Contact posting has been unlocked'
   end
 end
+local function lock_group_lock_video(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_video_lock = data[tostring(target)]['settings']['lock_video']
+  if group_lock_video_lock == '🔒' then
+    return 'قفل بود'
+  else
+    data[tostring(target)]['settings']['lock_video'] = '🔒'
+    save_data(_config.moderation.data, data)
+    return 'قفل شد'
+  end
+end
+local function unlock_group_lock_video(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_lock_video_lock = data[tostring(target)]['settings']['lock_video']
+  if group_lock_video_lock == '🔒' then
+    return 'باز بود'
+  else
+    data[tostring(target)]['settings']['lock_video'] = '🔒'
+    save_data(_config.moderation.data, data)
+    return 'باز شد'
+  end
+end
 local function lock_group_lock_gif(msg, data, target)
   if not is_momod(msg) then
     return
@@ -1130,6 +1156,11 @@ function show_supergroup_settingsmod(msg, target)
 		end
         end
 	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_video'] then
+			data[tostring(target)]['settings']['lock_video'] = '🔓'
+		end
+        end
+	  if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_ax'] then
 			data[tostring(target)]['settings']['lock_ax'] = '🔓'
 		end
@@ -1141,7 +1172,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "🔶sepergroup name :"..msg.to.print_name.."\n 🔷supergroup id :"..msg.to.id.."\n🔶your name : "..msg.from.print_name.."\n 🔷your first name : "..msg.from.first_name.."\n 🔶your last name :"..msg.from.last_name.."\n 🔷your username :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock contacts: "..settings.lock_contacts.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag : "..settings.tag.."\n⚙group type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.."\n _____________________________ \n\n ⚠️media locks : \n\n🔧lock gif : "..settings.lock_gif.."\n🔧lock pic : "..settings.lock_ax.." \n _____________________________\n\n🗝Switch:\n🗝 friend: "..settings.friend.."\n 🗝all: "..settings.all.."\n\n bot version : v2 \n 🔥Fire Bot🔥"
+  local text = "🔶sepergroup name :"..msg.to.print_name.."\n 🔷supergroup id :"..msg.to.id.."\n🔶your name : "..msg.from.print_name.."\n 🔷your first name : "..msg.from.first_name.."\n 🔶your last name :"..msg.from.last_name.."\n 🔷your username :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙Lock contacts: "..settings.lock_contacts.."\n ⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙Lock Arabic: "..settings.lock_arabic.."\n⚙Lock Member: "..settings.lock_member.."\n⚙Lock RTL: "..settings.lock_rtl.."\n ⚙Lock Tgservice: "..settings.lock_tgservice.."\n⚙Lock sticker: "..settings.lock_sticker.."\n ⚙Lock tag : "..settings.tag.."\n⚙group type: "..gp_type.."\n⚙Public: "..settings.public.."\n⚙ Strict settings: "..settings.strict.."\n _____________________________ \n\n ⚠️media locks : \n\n🔧lock gif : "..settings.lock_gif.."\n🔧lock pic : "..settings.lock_ax.." \n🔧 lock video : "..settings.lock_video.." \n _____________________________\n\n🗝Switch:\n🗝 friend: "..settings.friend.."\n 🗝all: "..settings.all.."\n\n bot version : v2 \n 🔥Fire Bot🔥"
   return text
 end
 
@@ -2392,6 +2423,10 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked gif posting")
 				return lock_group_lock_gif(msg, data, target)
 			end
+			if matches[2] == 'video' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked video posting")
+				return lock_group_lock_video(msg, data, target)
+			end
 			if matches[2] == 'pic' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked pic posting")
 				return lock_group_lock_ax(msg, data, target)
@@ -2569,6 +2604,10 @@ local function run(msg, matches)
 			if matches[2] == 'gif' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked gif posting")
 				return unlock_group_lock_gif(msg, data, target)
+			end
+			if matches[2] == 'video' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked video posting")
+				return unlock_group_lock_video(msg, data, target)
 			end
 			if matches[2] == 'pic' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked pic posting")

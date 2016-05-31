@@ -1136,7 +1136,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "🔶sepergroup name :"..msg.to.print_name.."\n🔷requester :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙L⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙"
+  local text = "🔶sepergroup name :"..msg.to.print_name.."\n🔷requester :@"..msg.from.username.."\n _____________________________\n\n ⚙SuperGroup settings⚙:\n\n⚙ Lock links : "..settings.lock_link.."\n⚙ Lock flood: "..settings.flood.."\n ⚙Flood sensitivity : "..NUM_MSG_MAX.."\n ⚙Lock spam: "..settings.lock_spam.."\n ⚙\n _____________________________ \n\n ⚠️media locks : \n\n🔧lock gif : "..settings.lock_gif.."\n🔧lock pic : "..settings.lock_ax.." \n🔧 lock video : "..settings.lock_video.."\n🔧lock all media : "..settings.lock_media.."\n _____________________________\n\n🗝Switch:\n🗝"
   return text
 end
 

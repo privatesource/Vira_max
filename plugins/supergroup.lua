@@ -228,34 +228,6 @@ local function unlock_group_all(msg, data, target)
     return 'all setting has been unlocked'
   end
 end
-local function lock_group_family(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_family_lock = data[tostring(target)]['settings']['family']
-  if group_family_lock == '🔒' then
-    return 'family setting is already locked'
-  else
-    data[tostring(target)]['settings']['family'] = '🔒'
-    save_data(_config.moderation.data, data)
-    return 'family setting has been locked'
-  end
-end
-
-local function unlock_group_family(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_family_lock = data[tostring(target)]['settings']['family']
-  if group_family_lock == '🔓' then
-    return 'family setting is not locked'
-  else
-    data[tostring(target)]['settings']['family'] = '🔓'
-    save_data(_config.moderation.data, data)
-    return 'family setting has been unlocked'
-  end
-end
-
 
 local function lock_group_friend(msg, data, target)
   if not is_momod(msg) then
@@ -1194,10 +1166,6 @@ function show_supergroup_settingsmod(msg, target)
 	  if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_audio'] then
 			data[tostring(target)]['settings']['lock_audio'] = '🔓'
-		end
-	end
-	if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['family'] then
 		end
 	end
   local gp_type = data[tostring(msg.to.id)]['group_type']
@@ -2335,33 +2303,7 @@ local function run(msg, matches)
       	}
       	return lock_group_friend(msg, data, target), friend
       end
-      			   if matches[2] == 'family' then
-      	local family ={
-        unlock_group_links(msg, data, target),
-		unlock_group_tag(msg, data, target),
-		unlock_group_spam(msg, data, target),
-		unlock_group_flood(msg, data, target),
-		unlock_group_arabic(msg, data, target),
-		unlock_group_membermod(msg, data, target),
-		unlock_group_rtl(msg, data, target),
-		unlock_group_tgservice(msg, data, target),
-		unlock_group_sticker(msg, data, target),
-		unlock_group_contacts(msg, data, target),
-		unlock_group_english(msg, data, target),
-		unlock_group_fwd(msg, data, target),
-		unlock_group_reply(msg, data, target),
-		unlock_group_join(msg, data, target),
-		unlock_group_emoji(msg, data, target),
-		unlock_group_username(msg, data, target),
-		unlock_group_fosh(msg, data, target),
-		unlock_group_lock_media(msg, data, target),
-		unlock_group_leave(msg, data, target),
-		unlock_group_bots(msg, data, target),
-		unlock_group_operator(msg, data, target),
-      	}
-      	return unlock_group_family(msg, data, target), family
-      end
-                            
+  
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
@@ -2522,32 +2464,7 @@ local function run(msg, matches)
       	}
       	return unlock_group_friend(msg, data, target), dfriend
       end
-      			     if matches[2] == 'family' then
-      	local dfamily ={
-        unlock_group_links(msg, data, target),
-		lock_group_tag(msg, data, target),
-		lock_group_spam(msg, data, target),
-		lock_group_flood(msg, data, target),
-		unlock_group_arabic(msg, data, target),
-		lock_group_membermod(msg, data, target),
-		unlock_group_rtl(msg, data, target),
-		lock_group_tgservice(msg, data, target),
-		lock_group_sticker(msg, data, target),
-		unlock_group_contacts(msg, data, target),
-		unlock_group_english(msg, data, target),
-		unlock_group_fwd(msg, data, target),
-		unlock_group_reply(msg, data, target),
-		lock_group_join(msg, data, target),
-		unlock_group_emoji(msg, data, target),
-		unlock_group_username(msg, data, target),
-		lock_group_fosh(msg, data, target),
-		unlock_group_lock_media(msg, data, target),
-		lock_group_leave(msg, data, target),
-		lock_group_bots(msg, data, target),
-		unlock_group_operator(msg, data, target),
-      	}
-      	return lock_group_family(msg, data, target), dfamily
-      end
+
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")
 				return unlock_group_links(msg, data, target)

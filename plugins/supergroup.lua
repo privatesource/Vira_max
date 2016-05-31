@@ -1694,7 +1694,8 @@ local function run(msg, matches)
 			end
 			return "Already a SuperGroup"
 		end
-	end
+        end
+end
 	if msg.to.type == 'channel' then
 	local support_id = msg.from.id
 	local receiver = get_receiver(msg)

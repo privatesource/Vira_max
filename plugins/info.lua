@@ -51,7 +51,7 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
   local um_hash = 'msgs:'..result.peer_id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'تعداد پیام های فرستاده : : '..user_info_msgs..'\n\n'
-  text = text..'@cruel_channel'
+  text = text..''
   send_msg(extra.receiver, text, ok_cb,  true)
   else
 	send_msg(extra.receiver, ' Username not found.', ok_cb, false)
@@ -239,8 +239,8 @@ return {
 	'(Reply)!setrank <rank>: change members rank.',
   },
   patterns = {
-    "^[/#!]([Ii][Dd])$",
-    "^[/!#]([Ii][Dd]) (.*)$",
+    "^[/#!]([Ii][Nn][Ff][Oo])$",
+    "^[/!#]([Ii][Nn][Ff][Oo]) (.*)$",
 	"^[/!#]([Ss][Ee][Tt][Rr][Aa][Nn][Kk]) (%d+) (.*)$",
 	"^[/!#]([Ss][Ee][Tt][Rr][Aa][Nn][Kk]) (.*)$",
   },

@@ -215,7 +215,7 @@ local function run(msg, matches)
     return send_msg(receiver, text, ok_cb, true)
     end
   end
-  if matches[1]:lower() == 'id' and matches[2] then
+  if matches[1]:lower() == 'info' and matches[2] then
    local user = matches[2]
    local chat2 = msg.to.id
    local receiver = get_receiver(msg)

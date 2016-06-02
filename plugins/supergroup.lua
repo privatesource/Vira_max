@@ -1685,7 +1685,7 @@ local function run(msg, matches)
 			end
 			return "Already a SuperGroup"
 		end
-        end
+	end
 	if msg.to.type == 'channel' then
 	local support_id = msg.from.id
 	local receiver = get_receiver(msg)
@@ -1705,6 +1705,7 @@ local function run(msg, matches)
 			set_mutes(msg.to.id)
 			channel_set_admin(receiver, 'user#id'..msg.from.id, ok_cb, false)
 		end
+
 		if matches[1] == 'rem' and is_admin1(msg) and not matches[2] then
 			if not is_super_group(msg) then
 				return reply_msg(msg.id, 'SuperGroup is not added.', ok_cb, false)
@@ -1838,7 +1839,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				return "<code>SuperGroup id for</code> : " ..string.gsub(msg.to.print_name, "_", " ").. "\n\n "..msg.to.id
+				return "SuperGroup ID for \n" ..string.gsub(msg.to.print_name, "_", " ").. "\n"..msg.to.id
 			end
 		end
 
@@ -1889,7 +1890,7 @@ local function run(msg, matches)
 				return "Create a link using /newlink first!\n\nOr if I am not creator use /setlink to set your link"
 			end
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group link ["..group_link.."]")
-			return "درخواست لینک گروه توسط @"..msg.from.username.." \n\n لینک گروه : \n\n"..group_link
+			return "Group link:\n"..group_link
 		end
 
 		if matches[1] == "invite" and is_sudo(msg) then
@@ -2227,7 +2228,7 @@ local function run(msg, matches)
 		lock_group_rtl(msg, data, target),
 		lock_group_tgservice(msg, data, target),
 		lock_group_sticker(msg, data, target),
-		lock_group_share(msg, data, target),
+		lock_group_contacts(msg, data, target),
 		lock_group_english(msg, data, target),
 		lock_group_fwd(msg, data, target),
 		lock_group_reply(msg, data, target),
@@ -2235,15 +2236,15 @@ local function run(msg, matches)
 		lock_group_emoji(msg, data, target),
 		lock_group_username(msg, data, target),
 		lock_group_fosh(msg, data, target),
-		lock_group_lock_media(msg, data, target),
+		lock_group_media(msg, data, target),
 		lock_group_leave(msg, data, target),
 		lock_group_bots(msg, data, target),
 		lock_group_operator(msg, data, target),
       	}
       	return lock_group_all(msg, data, target), safemode
       end
-			     if matches[2] == 'friend' then
-      	local friend ={
+			     if matches[2] == 'etehad' then
+      	local etehad ={
         unlock_group_links(msg, data, target),
 		lock_group_tag(msg, data, target),
 		lock_group_spam(msg, data, target),
@@ -2253,7 +2254,7 @@ local function run(msg, matches)
 		unlock_group_rtl(msg, data, target),
 		lock_group_tgservice(msg, data, target),
 		lock_group_sticker(msg, data, target),
-		unlock_group_share(msg, data, target),
+		unlock_group_contacts(msg, data, target),
 		unlock_group_english(msg, data, target),
 		unlock_group_fwd(msg, data, target),
 		unlock_group_reply(msg, data, target),
@@ -2261,14 +2262,13 @@ local function run(msg, matches)
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
 		lock_group_fosh(msg, data, target),
-		unlock_group_lock_media(msg, data, target),
+		unlock_group_media(msg, data, target),
 		lock_group_leave(msg, data, target),
 		lock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
       	}
-      	return lock_group_friend(msg, data, target), friend
+      	return lock_group_etehad(msg, data, target), etehad
       end
-  
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
@@ -2309,9 +2309,9 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked sticker posting")
 				return lock_group_sticker(msg, data, target)
 			end
-			if matches[2] == 'share' then
+			if matches[2] == 'contacts' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked contact posting")
-				return lock_group_share(msg, data, target)
+				return lock_group_contacts(msg, data, target)
 			end
 			if matches[2] == 'strict' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked enabled strict settings")
@@ -2339,7 +2339,7 @@ local function run(msg, matches)
 			end
 			if matches[2] == 'media' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked media")
-				return lock_group_lock_media(msg, data, target)
+				return lock_group_media(msg, data, target)
 			end
 			if matches[2] == 'username' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked username")
@@ -2357,7 +2357,7 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked operator")
 				return lock_group_operator(msg, data, target)
 			end
-			if matches[2] == 'gif' then
+						if matches[2] == 'gif' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked gif posting")
 				return lock_group_lock_gif(msg, data, target)
 			end
@@ -2374,6 +2374,7 @@ local function run(msg, matches)
 				return lock_group_lock_ax(msg, data, target)
 	           	end
 		end
+		end
 
 		if matches[1] == 'unlock' and is_momod(msg) then
 			local target = msg.to.id
@@ -2388,7 +2389,7 @@ local function run(msg, matches)
 		unlock_group_rtl(msg, data, target),
 		unlock_group_tgservice(msg, data, target),
 		unlock_group_sticker(msg, data, target),
-		unlock_group_share(msg, data, target),
+		unlock_group_contacts(msg, data, target),
 		unlock_group_english(msg, data, target),
 		unlock_group_fwd(msg, data, target),
 		unlock_group_reply(msg, data, target),
@@ -2396,15 +2397,15 @@ local function run(msg, matches)
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
 		unlock_group_fosh(msg, data, target),
-		unlock_group_lock_media(msg, data, target),
+		unlock_group_media(msg, data, target),
 		unlock_group_leave(msg, data, target),
 		unlock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
       	}
       	return unlock_group_all(msg, data, target), dsafemode
       end
-	  	if matches[2] == 'friend' then
-      	local dfriend ={
+	  	if matches[2] == 'etehad' then
+      	local detehad ={
         lock_group_links(msg, data, target),
 		unlock_group_tag(msg, data, target),
 		lock_group_spam(msg, data, target),
@@ -2414,7 +2415,7 @@ local function run(msg, matches)
 		unlock_group_rtl(msg, data, target),
 		unlock_group_tgservice(msg, data, target),
 		unlock_group_sticker(msg, data, target),
-		unlock_group_share(msg, data, target),
+		unlock_group_contacts(msg, data, target),
 		unlock_group_english(msg, data, target),
 		unlock_group_fwd(msg, data, target),
 		unlock_group_reply(msg, data, target),
@@ -2422,14 +2423,13 @@ local function run(msg, matches)
 		unlock_group_emoji(msg, data, target),
 		unlock_group_username(msg, data, target),
 		unlock_group_fosh(msg, data, target),
-		unlock_group_lock_media(msg, data, target),
+		unlock_group_media(msg, data, target),
 		unlock_group_leave(msg, data, target),
 		unlock_group_bots(msg, data, target),
 		unlock_group_operator(msg, data, target),
       	}
-      	return unlock_group_friend(msg, data, target), dfriend
+      	return unlock_group_etehad(msg, data, target), detehad
       end
-
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")
 				return unlock_group_links(msg, data, target)
@@ -2470,9 +2470,9 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked sticker posting")
 				return unlock_group_sticker(msg, data, target)
 			end
-			if matches[2] == 'share' then
+			if matches[2] == 'contacts' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked contact posting")
-				return unlock_group_share(msg, data, target)
+				return unlock_group_contacts(msg, data, target)
 			end
 			if matches[2] == 'strict' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked disabled strict settings")
@@ -2500,7 +2500,7 @@ local function run(msg, matches)
 			end
 			if matches[2] == 'media' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked media")
-				return unlock_group_lock_media(msg, data, target)
+				return unlock_group_media(msg, data, target)
 			end
 			if matches[2] == 'username' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked disabled username")
@@ -2534,7 +2534,7 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked pic posting")
 				return unlock_group_lock_ax(msg, data, target)
 		        end
-                end
+		end
 
 		if matches[1] == 'setflood' then
 			if not is_momod(msg) then
@@ -2764,7 +2764,7 @@ local function run(msg, matches)
 		end
 
 		if matches[1] == 'help' and not is_owner(msg) then
-			text = "only mods"
+			text = "Message /superhelp to @antispam_shield in private for SuperGroup help"
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'help' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
@@ -2899,3 +2899,4 @@ return {
   run = run,
   pre_process = pre_process
 }
+

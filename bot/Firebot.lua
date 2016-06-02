@@ -321,7 +321,8 @@ function create_config( )
    "member",
    "site",
    "logo",
-   "file"
+   "file",
+   "time2"
 
     },
     sudo_users = {105831687,65609166,68747297,85831686},--Sudo users

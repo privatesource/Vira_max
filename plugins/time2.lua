@@ -13,7 +13,7 @@ end
  
 return {
   patterns = {
-    "^time"
+    "^زمان"
   }, 
   run = run 
 }

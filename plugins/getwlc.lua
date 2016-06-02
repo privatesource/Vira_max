@@ -1,4 +1,4 @@
-local function run(msg, matches, callback, extra)
+local function run(msg, matches)
 
 local data = load_data(_config.moderation.data)
 

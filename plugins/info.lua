@@ -1,7 +1,7 @@
 do
-local Arian = 65609166 --put your id here(BOT OWNER ID)
+local Arian = 105831687 --put your id here(BOT OWNER ID)
 local Sosha = 0 
---local Sosha2 = 164484149
+--local Sosha2 = 
 
 local function setrank(msg, name, value,receiver) -- setrank function
   local hash = nil
@@ -35,7 +35,7 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
 	   --elseif result.peer_id == tonumber(Sosha2) then
 	   --text = text..'Rank : مدیر ارشد ربات (Full Access Admin) \n\n'
 	  elseif is_admin2(result.peer_id) then
-	   text = text..'مقام : ادمین \n\n'
+	   text = text..'مقام : سودو \n\n'
 	  elseif is_owner2(result.peer_id, extra.chat2) then
 	   text = text..'مقام : مدیر گروه \n\n'
 	  elseif is_momod2(result.peer_id, extra.chat2) then
@@ -78,7 +78,7 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
 	   elseif result.peer_id == tonumber(Sosha2) then
 	   text = text..'مقام : مدیر ارشد ربات (Full Access Admin) \n\n'
 	  elseif is_admin2(result.peer_id) then
-	   text = text..'مقام : ادمین \n\n'
+	   text = text..'مقام : سودو \n\n'
 	  elseif is_owner2(result.peer_id, extra.chat2) then
 	   text = text..'مقام : مدیر گروه \n\n'
 	  elseif is_momod2(result.peer_id, extra.chat2) then
@@ -166,7 +166,7 @@ local function run(msg, matches)
   return text
   end
   end
- if matches[1]:lower() == 'id' and not matches[2] then
+ if matches[1]:lower() == 'info' and not matches[2] then
   local receiver = get_receiver(msg)
   local Reply = msg.reply_id
   if msg.reply_id then

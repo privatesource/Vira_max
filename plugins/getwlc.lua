@@ -1,10 +1,10 @@
-local function run(msg, matches)
+local function run(msg, matches, callback, extra)
 
 local data = load_data(_config.moderation.data)
 
 local group_welcome = data[tostring(msg.to.id)]['group_welcome']
 
-if matches[1]:lower() == 'channel_add_user' or 'channel_add_user_link' then
+if matches[1]:lower() == 'chat_add_user' or 'chat_add_user_link' then
     if not msg.service then 
         return nil 
     else
@@ -14,8 +14,8 @@ end
 end
 return {
   patterns = {
-  "^!!tgservice (channel_add_user)$",
-  "^!!tgservice (channel_add_user_link)$",
+  "^!!tgservice (chat_add_user)$",
+  "^!!tgservice (chat_add_user_link)$",
   },
   run = run,
   pre_process = pre_process

@@ -1,62 +1,84 @@
 do
+
 local function run(msg, matches)
-  local lionteam = URL.escape(matches[1])
-  local size = '150'
-        if matches[2] == 'big' then
-            size = '400'
-        elseif matches[2] == 'normal' then
-            size = '100'
-      elseif matches[2] == '300' then
-          size = '300' 
-    elseif matches[2] == '200' then
-          size = '200'
-    elseif matches[2] == '100' then
-        size = '100'
-    elseif matches[2] == 'small' then
-        size = '50'
-    elseif matches[2] then
-        size = matches[2]
-        end
-  local f = 'ff2e4357'
+if matches[1]:lower() == 't2s' then
+        local text = URL.escape(matches[2])
+        local color = 'blue'
         if matches[3] == 'red' then
-            f = 'FF0000'
-        elseif matches[3] == 'blue' then
-            f = '002BFF'
-      elseif matches[3] == 'yellow' then
-          f = 'F7FF00' 
-    elseif matches[3] == 'black' then
-          f = '000000'
-    elseif matches[3] == 'orange' then
-          f = 'FF8000'
-    elseif matches[3] == 'lowblue' then
-        f = '00FFFB'
-    elseif matches[3] == 'purple' then
-        f = 'CB00FD'
-    elseif matches[3] == 'gray' then
-        f = '929C9A'
+            color = 'red'
+        elseif matches[3] == 'black' then
+            color = 'black'
+      elseif matches[3] == 'blue' then
+          color = 'blue'
     elseif matches[3] == 'green' then
-        f = '2AFF00' 
+        color = 'green'
+    elseif matches[3] == 'yellow' then
+        color = 'yellow'
     elseif matches[3] == 'pink' then
-        f = 'FF00E8'
-    elseif matches[3] then
-        f = matches[3]
+        color = 'magenta'
+    elseif matches[3] == 'orange' then
+        color = 'Orange'
+    elseif matches[3] == 'brown' then
+        color = 'DarkOrange'
         end
-  local url = "http://assets.imgix.net/examples/redleaf.jpg?blur=120&w=700&h=400&fit=crop&txt="..lionteam.."&txtsize="..size.."&txtclr="..f.."&txtalign=middle,center&txtfont=Futura%20Condensed%20Medium&mono=ff6598cc=?markscale=60&markalign=center%2Cdown&mark64=aHR0cDovL2xpb250ZWFtLmlyL2ltZy9zcGVjdHJlbG9nby5wbmc"
-  local ext = ".webp"
-  local cb_extra = {file_path=file}
-
-  local receiver = get_receiver(msg)
-  local file = download_to_file(url, ".webp")
-  send_document(receiver, file, rmtmp_cb, cb_extra)
+        local font = 'mathrm'
+        if matches[4] == 'bold' then
+            font = 'mathbf'
+        elseif matches[4] == 'italic' then
+            font = 'mathit'
+        elseif matches[4] == 'fun' then
+            font = 'mathfrak'
+        elseif matches[4] == 'arial' then
+            font = 'mathrm'
+        end
+        local size = '700'
+        if matches[5] == 'small' then 
+            size = '300'
+        elseif matches[5] == 'larg' then
+            size = '900'
+ end
+local url = 'http://latex.codecogs.com/png.latex?'..'\\dpi{'..size..'}%20\\huge%20\\'..font..'{{\\color{'..color..'}'..text..'}}'
+local file = download_to_file(url,'file.webp')
+if msg.to.type == 'chat' then
+send_document('chat#id'..msg.to.id,file,ok_cb,false)
 end
-
+end
+end
 return {
   patterns = {
-    "^[/#!]sticker (.+) (.+) (.+)$",
-    "^[/#!]sticker (.+) (.+)$",
-    "^[/#!]sticker (.+)$"
+ "^[!/#](t2s) (.*) ([^%s]+) (.*) (small)$",
+ "^[!/#](t2s) (.*) ([^%s]+) (.*) (larg)$",
+ "^[!/#](t2s) (.*) ([^%s]+) (.*) (%d+)$",
+ "^[!/#](t2s) (.*) ([^%s]+) (bold)$",
+ "^[!/#](t2s) (.*) ([^%s]+) (italic)$",
+ "^[!/#](t2s) (.*) ([^%s]+) (fun)$",
+ "^[!/#](t2s) (.*) ([^%s]+) (arial)$",
+ "^[!/#](t2s) (.*) (red)$",
+ "^[!/#](t2s) (.*) (black)$",
+ "^[!/#](t2s) (.*) (blue)$",
+ "^[!/#](t2s) (.*) (green)$",
+ "^[!/#](t2s) (.*) (yellow)$",
+ "^[!/#](t2s) (.*) (pink)$",
+ "^[!/#](t2s) (.*) (orange)$",
+ "^[!/#](t2s) (.*) (brown)$",
+ "^[!/#](t2s) +(.*)$",
+ "^([Tt]2s) (.*) ([^%s]+) (.*) (small)$",
+ "^([Tt]2s) (.*) ([^%s]+) (.*) (larg)$",
+ "^([Tt]2s) (.*) ([^%s]+) (.*) (%d+)$",
+ "^([Tt]2s) (.*) ([^%s]+) (bold)$",
+ "^([Tt]2s) (.*) ([^%s]+) (italic)$",
+ "^([Tt]2s) (.*) ([^%s]+) (fun)$",
+ "^([Tt]2s) (.*) ([^%s]+) (arial)$",
+ "^([Tt]2s) (.*) (red)$",
+ "^([Tt]2s) (.*) (black)$",
+ "^([Tt]2s) (.*) (blue)$",
+ "^([Tt]2s) (.*) (green)$",
+ "^([Tt]2s) (.*) (yellow)$",
+ "^([Tt]2s) (.*) (pink)$",
+ "^([Tt]2s) (.*) (orange)$",
+ "^([Tt]2s) (.*) (brown)$",
+ "^([Tt]2s) +(.*)$"
   },
-  run = run
-}
-
-end
+  run = run,
+  }
+  end

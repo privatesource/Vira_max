@@ -1592,7 +1592,7 @@ local function run(msg, matches)
 				return
 			end
 			if is_super_group(msg) then
-				return reply_msg(msg.id, 'SuperGroup is already added.', ok_cb, false)
+				return reply_msg(msg.id, '✅SuperGroup is already added.✅', ok_cb, false)
 			end
 			print("SuperGroup "..msg.to.print_name.."("..msg.to.id..") added")
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] added SuperGroup")
@@ -1734,7 +1734,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				return "⭕️SuperGroup Name: " ..string.gsub(msg.to.print_name, "_", " ").. "\n\n🆔SuperGroup ID: "..msg.to.id
+				return "📝SuperGroup Name: " ..string.gsub(msg.to.print_name, "_", " ").. "\n\n🆔SuperGroup ID: "..msg.to.id
 			end
 		end
 
@@ -1765,14 +1765,14 @@ local function run(msg, matches)
 		if matches[1] == 'setlink' and is_owner(msg) then
 			data[tostring(msg.to.id)]['settings']['set_link'] = 'waiting'
 			save_data(_config.moderation.data, data)
-			return 'Please send the new group link now'
+			return '@"..msg.from.id.." Please send the new group link now'
 		end
 
 		if msg.text then
 			if msg.text:match("^(https://telegram.me/joinchat/%S+)$") and data[tostring(msg.to.id)]['settings']['set_link'] == 'waiting' and is_owner(msg) then
 				data[tostring(msg.to.id)]['settings']['set_link'] = msg.text
 				save_data(_config.moderation.data, data)
-				return "New link set"
+				return "New link seted by @"..msg.from.username..""
 			end
 		end
 

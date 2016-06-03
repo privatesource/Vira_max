@@ -1636,7 +1636,7 @@ local function run(msg, matches)
 				return "no owner,ask admins in support groups to set owner for your SuperGroup"
 			end
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] used /owner")
-			return "👷🏻SuperGroup owner is @"..msg.from.username..'["..msg.from.id.."]'
+			return "👷🏻SuperGroup owner is @"..msg.from.username..'["..group_owner..']'
 		end
 
 		if matches[1] == "modlist" then

@@ -1765,7 +1765,7 @@ local function run(msg, matches)
 		if matches[1] == 'setlink' and is_owner(msg) then
 			data[tostring(msg.to.id)]['settings']['set_link'] = 'waiting'
 			save_data(_config.moderation.data, data)
-			return '@"..msg.from.id.." Please send the new group link now'
+			return 'Please send the new group link now'
 		end
 
 		if msg.text then

@@ -1,4 +1,4 @@
-# Fire Bot
+# spamguard
 
 created by Lua_PYthon
 xml _ php _ html in the bot ...
@@ -237,7 +237,7 @@ Open ./data/config.lua and add your ID to the "sudo_users" section in the follow
 ```
 
 
----- by parsa alemi
+---- by KINg KOMEil
 
 
 ## Run By start.sh script .
